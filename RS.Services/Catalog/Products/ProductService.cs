@@ -29,6 +29,32 @@ namespace RS.Services.Catalog.Products
             _context = context;
             _storageService = storageService;
         }
+
+        public async Task<List<ProductVm>> GetAllTest()
+        {
+            var query = from p in _context.Products
+                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId
+                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId
+                        join c in _context.Categories on pic.CategoryId equals c.Id
+                        select new { p, pt, pic };
+            var data = await query.Select(x => new ProductVm()
+                {
+                    Id = x.p.Id,
+                    Name = x.pt.Name,
+                    DateCreated = x.p.DateCreated,
+                    Description = x.pt.Description,
+                    Details = x.pt.Details,
+                    LanguageId = x.pt.LanguageId,
+                    OriginalPrice = x.p.OriginalPrice,
+                    Price = x.p.Price,
+                    SeoAlias = x.pt.SeoAlias,
+                    SeoDescription = x.pt.SeoDescription,
+                    SeoTitle = x.pt.SeoTitle,
+                    Stock = x.p.Stock,
+                    ViewCount = x.p.ViewCount
+                }).ToListAsync();
+            return data;
+        }
         public async Task<int> AddImage(int productId, ProductImageCreateRequest request)
         {
             var productImage = new ProductImage()
@@ -348,14 +374,10 @@ namespace RS.Services.Catalog.Products
             product.Stock += addedQuantity;
             return await _context.SaveChangesAsync() > 0;
         }
-        // IFormFile --> string
         private async Task<string> SaveFile(IFormFile file)
         {
-            //lay ra filename
             var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            //get cai Extension cua no -> tao ra 1 cai guid moi + voi ten file
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
-            //luu vao 1 cai storageService
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
             return "/" + USER_CONTENT_FOLDER_NAME + "/" + fileName;
         }

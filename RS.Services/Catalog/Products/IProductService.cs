@@ -10,6 +10,7 @@ namespace RS.Services.Catalog.Products
 {
     public interface IProductService
     {
+        Task<List<ProductVm>> GetAllTest();
         Task<int> Create(ProductCreateRequest request);
         Task<int> Update(ProductUpdateRequest request);
         Task<int> Delete(int productId);
