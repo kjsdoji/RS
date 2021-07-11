@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0Solution Items", "0Solution Items", "{B7F90C90-3A3C-4DB2-B9D9-59F651F5EBCD}"
+	ProjectSection(SolutionItems) = preProject
+		REAME.md = REAME.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84B664A1-066B-43EC-A974-8389353A4E41}
+	EndGlobalSection
+EndGlobal
