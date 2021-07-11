@@ -8,6 +8,7 @@ namespace RS.Utilities.Constants
     {
         public const string MainConnectionString = "RSDb";
         public const string CartSession = "CartSession";
+        public static string BACK_END_NAMED_CLIENT = "Back_End_Named_Client";
 
         public class AppSettings
         {

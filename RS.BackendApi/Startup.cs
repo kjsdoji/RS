@@ -34,41 +34,33 @@ namespace RS.BackendApi
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RSDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
+            
             services.AddTransient<IProductService, ProductService>();
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<RSDbContext>()
                 .AddDefaultTokenProviders();
-
-            //Declare DI
+            
             services.AddTransient<IStorageService, FileStorageService>();
-
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryService, CategoryService>();
-
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<ISlideService, SlideService>();
-
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IUserService, UserService>();
-
+            
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1" });
-
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n
@@ -79,7 +71,6 @@ namespace RS.BackendApi
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement()
                   {
                     {
@@ -98,11 +89,11 @@ namespace RS.BackendApi
                       }
                     });
             });
-
+            
             string issuer = Configuration.GetValue<string>("Tokens:Issuer");
             string signingKey = Configuration.GetValue<string>("Tokens:Key");
             byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
-
+            
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -125,8 +116,6 @@ namespace RS.BackendApi
                 };
             });
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -142,15 +131,12 @@ namespace RS.BackendApi
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
-
             app.UseAuthorization();
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger eShopSolution V1");
             });
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
