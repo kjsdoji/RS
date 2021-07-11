@@ -6,7 +6,7 @@ namespace RS.Utilities.Constants
 {
     public class SystemConstants
     {
-        public const string MainConnectionString = "YCCDb";
+        public const string MainConnectionString = "RSDb";
         public const string CartSession = "CartSession";
 
         public class AppSettings
