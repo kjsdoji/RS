@@ -27,7 +27,7 @@ namespace RS.BackendApi.Controllers
             var products = await _productService.GetAllPaging(request);
             return Ok(products);
         }
-
+        // api/producs/vi/1
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
         {
@@ -36,7 +36,8 @@ namespace RS.BackendApi.Controllers
                 return BadRequest("Cannot find product");
             return Ok(product);
         }
-
+        // api/products/featured/vi/10
+        // GetFeaturedProducts
         [HttpGet("featured/{languageId}/{take}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetFeaturedProducts(int take, string languageId)
@@ -44,7 +45,6 @@ namespace RS.BackendApi.Controllers
             var products = await _productService.GetFeaturedProducts(languageId, take);
             return Ok(products);
         }
-
         [HttpGet("latest/{languageId}/{take}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetLatestProducts(int take, string languageId)
@@ -52,10 +52,11 @@ namespace RS.BackendApi.Controllers
             var products = await _productService.GetLatestProducts(languageId, take);
             return Ok(products);
         }
-
         [HttpPost]
         [Consumes("multipart/form-data")]
-        [Authorize]
+        //[Authorize]
+        [AllowAnonymous]
+        // Create
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -70,7 +71,6 @@ namespace RS.BackendApi.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = productId }, product);
         }
-
         [HttpPut("{productId}")]
         [Consumes("multipart/form-data")]
         [Authorize]
@@ -86,9 +86,10 @@ namespace RS.BackendApi.Controllers
                 return BadRequest();
             return Ok();
         }
-
+        // api/products/1
         [HttpDelete("{productId}")]
-        [Authorize]
+        //[Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> Delete(int productId)
         {
             var affectedResult = await _productService.Delete(productId);
@@ -96,7 +97,7 @@ namespace RS.BackendApi.Controllers
                 return BadRequest();
             return Ok();
         }
-
+        // api/products/1/10000
         [HttpPatch("{productId}/{newPrice}")]
         [Authorize]
         public async Task<IActionResult> UpdatePrice(int productId, decimal newPrice)
@@ -107,8 +108,7 @@ namespace RS.BackendApi.Controllers
 
             return BadRequest();
         }
-
-        //Images
+        // Images
         [HttpPost("{productId}/images")]
         public async Task<IActionResult> CreateImage(int productId, [FromForm] ProductImageCreateRequest request)
         {
@@ -124,7 +124,6 @@ namespace RS.BackendApi.Controllers
 
             return CreatedAtAction(nameof(GetImageById), new { id = imageId }, image);
         }
-
         [HttpPut("{productId}/images/{imageId}")]
         [Authorize]
         public async Task<IActionResult> UpdateImage(int imageId, [FromForm] ProductImageUpdateRequest request)
@@ -139,7 +138,6 @@ namespace RS.BackendApi.Controllers
 
             return Ok();
         }
-
         [HttpDelete("{productId}/images/{imageId}")]
         [Authorize]
         public async Task<IActionResult> RemoveImage(int imageId)
@@ -154,7 +152,6 @@ namespace RS.BackendApi.Controllers
 
             return Ok();
         }
-
         [HttpGet("{productId}/images/{imageId}")]
         public async Task<IActionResult> GetImageById(int productId, int imageId)
         {
@@ -163,7 +160,6 @@ namespace RS.BackendApi.Controllers
                 return BadRequest("Cannot find product");
             return Ok(image);
         }
-
         [HttpPut("{id}/categories")]
         [Authorize]
         public async Task<IActionResult> CategoryAssign(int id, [FromBody] CategoryAssignRequest request)

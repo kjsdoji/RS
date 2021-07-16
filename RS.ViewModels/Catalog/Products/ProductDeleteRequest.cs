@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RS.ViewModels.Catalog.Products
 {
-    class ProductDeleteRequest
+    public class ProductDeleteRequest
     {
         public int Id { get; set; }
     }

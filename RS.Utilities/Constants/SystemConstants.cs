@@ -8,6 +8,7 @@ namespace RS.Utilities.Constants
     {
         public const string MainConnectionString = "RSDb";
         public const string CartSession = "CartSession";
+        public static string BACK_END_NAMED_CLIENT = "Back_End_Named_Client";
 
         public class AppSettings
         {
@@ -18,8 +19,8 @@ namespace RS.Utilities.Constants
 
         public class ProductSettings
         {
-            public const int NumberOfFeaturedProducts = 4;
-            public const int NumberOfLatestProducts = 6;
+            public const int NumberOfFeaturedProducts = 5;
+            public const int NumberOfLatestProducts = 5;
         }
 
         public class ProductConstants

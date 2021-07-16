@@ -102,6 +102,7 @@ namespace RS.Services.System.Users
 
         public async Task<ApiResult<PagedResult<UserVm>>> GetUsersPaging(GetUserPagingRequest request)
         {
+            // IQueryable<AppUser>
             var query = _userManager.Users;
             if (!string.IsNullOrEmpty(request.Keyword))
             {
@@ -109,7 +110,7 @@ namespace RS.Services.System.Users
                  || x.PhoneNumber.Contains(request.Keyword));
             }
 
-            //3. Paging
+            // Paging
             int totalRow = await query.CountAsync();
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
@@ -124,7 +125,7 @@ namespace RS.Services.System.Users
                     LastName = x.LastName
                 }).ToListAsync();
 
-            //4. Select and projection
+            // Select and projection
             var pagedResult = new PagedResult<UserVm>()
             {
                 TotalRecords = totalRow,

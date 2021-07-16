@@ -29,7 +29,6 @@ namespace RS.Services.Catalog.Products
             _context = context;
             _storageService = storageService;
         }
-
         public async Task<List<ProductVm>> GetAllTest()
         {
             var query = from p in _context.Products
@@ -95,7 +94,6 @@ namespace RS.Services.Catalog.Products
             product.ViewCount += 1;
             await _context.SaveChangesAsync();
         }
-        // Create without review!!!
         public async Task<int> Create(ProductCreateRequest request)
         {
             var languages = _context.Languages;
@@ -135,7 +133,6 @@ namespace RS.Services.Catalog.Products
                 DateCreated = DateTime.Now,
                 ProductTranslations = translations
             };
-            //Save image
             if (request.ThumbnailImage != null)
             {
                 product.ProductImages = new List<ProductImage>()
@@ -145,6 +142,7 @@ namespace RS.Services.Catalog.Products
                         Caption = "Thumbnail image",
                         DateCreated = DateTime.Now,
                         FileSize = request.ThumbnailImage.Length,
+                        // ProductCreateRequest IFormFile ThumbnailImage
                         ImagePath = await this.SaveFile(request.ThumbnailImage),
                         IsDefault = true,
                         SortOrder = 1
@@ -164,9 +162,8 @@ namespace RS.Services.Catalog.Products
             {
                 await _storageService.DeleteFileAsync(image.ImagePath);
             }
-
+            // Hard delete --> Soft delete
             _context.Products.Remove(product);
-
             return await _context.SaveChangesAsync();
         }
         public async Task<PagedResult<ProductVm>> GetAllPaging(GetManageProductPagingRequest request)
@@ -182,15 +179,11 @@ namespace RS.Services.Catalog.Products
                         from pi in ppi.DefaultIfEmpty()
                         where pt.LanguageId == request.LanguageId && pi.IsDefault == true
                         select new { p, pt, pic, pi };
-            //2. filter
+            //2. Filter
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
-
             if (request.CategoryId != null && request.CategoryId != 0)
-            {
                 query = query.Where(p => p.pic.CategoryId == request.CategoryId);
-            }
-
             //3. Paging
             int totalRow = await query.CountAsync();
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
@@ -212,9 +205,7 @@ namespace RS.Services.Catalog.Products
                     ViewCount = x.p.ViewCount,
                     ThumbnailImage = x.pi.ImagePath
                 }).ToListAsync();
-
             //4. Select and projection
-            //T is ProductVm
             var pagedResult = new PagedResult<ProductVm>()
             {
                 TotalRecords = totalRow,
@@ -229,13 +220,11 @@ namespace RS.Services.Catalog.Products
             var product = await _context.Products.FindAsync(productId);
             var productTranslation = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == productId
             && x.LanguageId == languageId);
-
             var categories = await (from c in _context.Categories
                                     join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId
                                     join pic in _context.ProductInCategories on c.Id equals pic.CategoryId
                                     where pic.ProductId == productId && ct.LanguageId == languageId
                                     select ct.Name).ToListAsync();
-
             var image = await _context.ProductImages.Where(x => x.ProductId == productId && x.IsDefault == true).FirstOrDefaultAsync();
             var review = await _context.ProductReviews.Where(x => x.ProductId == productId).ToListAsync();
             var productViewModel = new ProductVm()
