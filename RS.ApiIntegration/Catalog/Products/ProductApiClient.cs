@@ -52,6 +52,7 @@ namespace RS.ApiIntegration
                     data = br.ReadBytes((int)request.ThumbnailImage.OpenReadStream().Length);
                 }
                 ByteArrayContent bytes = new ByteArrayContent(data);
+                // ProductCreateRequest IFormFile ThumbnailImage
                 requestContent.Add(bytes, "thumbnailImage", request.ThumbnailImage.FileName);
             }
 

@@ -15,22 +15,18 @@ namespace RS.WebApp.Controllers
     public class CartController : Controller
     {
         private readonly IProductApiClient _productApiClient;
-
         public CartController(IProductApiClient productApiClient)
         {
             _productApiClient = productApiClient;
         }
-
         public IActionResult Index()
         {
             return View();
         }
-
         public IActionResult Checkout()
         {
             return View(GetCheckoutViewModel());
         }
-
         [HttpPost]
         public IActionResult Checkout(CheckoutViewModel request)
         {
@@ -56,7 +52,6 @@ namespace RS.WebApp.Controllers
             TempData["SuccessMsg"] = "Order puschased successful";
             return View(model);
         }
-
         [HttpGet]
         public IActionResult GetListItems()
         {
@@ -66,7 +61,6 @@ namespace RS.WebApp.Controllers
                 currentCart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(session);
             return Ok(currentCart);
         }
-
         public async Task<IActionResult> AddToCart(int id, string languageId)
         {
             var product = await _productApiClient.GetById(id, languageId);
@@ -97,7 +91,6 @@ namespace RS.WebApp.Controllers
             HttpContext.Session.SetString(SystemConstants.CartSession, JsonConvert.SerializeObject(currentCart));
             return Ok(currentCart);
         }
-
         public IActionResult UpdateCart(int id, int quantity)
         {
             var session = HttpContext.Session.GetString(SystemConstants.CartSession);
@@ -121,7 +114,6 @@ namespace RS.WebApp.Controllers
             HttpContext.Session.SetString(SystemConstants.CartSession, JsonConvert.SerializeObject(currentCart));
             return Ok(currentCart);
         }
-
         private CheckoutViewModel GetCheckoutViewModel()
         {
             var session = HttpContext.Session.GetString(SystemConstants.CartSession);

@@ -142,6 +142,7 @@ namespace RS.Services.Catalog.Products
                         Caption = "Thumbnail image",
                         DateCreated = DateTime.Now,
                         FileSize = request.ThumbnailImage.Length,
+                        // ProductCreateRequest IFormFile ThumbnailImage
                         ImagePath = await this.SaveFile(request.ThumbnailImage),
                         IsDefault = true,
                         SortOrder = 1

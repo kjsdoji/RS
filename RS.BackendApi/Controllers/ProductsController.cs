@@ -36,6 +36,8 @@ namespace RS.BackendApi.Controllers
                 return BadRequest("Cannot find product");
             return Ok(product);
         }
+        // api/products/featured/vi/10
+        // GetFeaturedProducts
         [HttpGet("featured/{languageId}/{take}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetFeaturedProducts(int take, string languageId)
@@ -54,6 +56,7 @@ namespace RS.BackendApi.Controllers
         [Consumes("multipart/form-data")]
         //[Authorize]
         [AllowAnonymous]
+        // Create
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
