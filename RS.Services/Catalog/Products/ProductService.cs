@@ -78,14 +78,13 @@ namespace RS.Services.Catalog.Products
         {
             var productReview = new ProductReview()
             {
-                Comments = request.Comment,
+                Comment = request.Comment,
                 PublishedDate = DateTime.Now,
                 ProductId = productId,
                 Rating = request.Rating
             };
             _context.ProductReviews.Add(productReview);
             await _context.SaveChangesAsync();
-            // Id???
             return productReview.Id;
         }
         public async Task AddViewcount(int productId)
@@ -226,7 +225,7 @@ namespace RS.Services.Catalog.Products
                                     where pic.ProductId == productId && ct.LanguageId == languageId
                                     select ct.Name).ToListAsync();
             var image = await _context.ProductImages.Where(x => x.ProductId == productId && x.IsDefault == true).FirstOrDefaultAsync();
-            var review = await _context.ProductReviews.Where(x => x.ProductId == productId).ToListAsync();
+            //var reviews = await _context.ProductReviews.Where(x => x.ProductId == productId).ToListAsync();
             var productViewModel = new ProductVm()
             {
                 Id = product.Id,
@@ -244,7 +243,7 @@ namespace RS.Services.Catalog.Products
                 ViewCount = product.ViewCount,
                 Categories = categories,
                 ThumbnailImage = image != null ? image.ImagePath : "no-image.jpg",
-                ProductReviews = review
+                //ProductReviews = reviews
             };
             return productViewModel;
         }
@@ -278,7 +277,7 @@ namespace RS.Services.Catalog.Products
                 Id = review.Id,
                 ProductId = review.ProductId,
                 PublishedDate = review.PublishedDate,
-                Comment = review.Comments,
+                Comment = review.Comment,
                 Rating = review.Rating
             };
             return viewModel;

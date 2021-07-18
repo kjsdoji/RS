@@ -16,5 +16,9 @@ namespace RS.WebApp.Models
         public List<ProductVm> RelatedProducts { get; set; }
         public List<ProductImageViewModel> ProductImages { get; set; }
         public List<ProductReviewViewModel> ProductReviews { get; set; }
+        public DateTime PublishedDate { get; set; }
+        public string Comment { get; set; }
+        public int ProductId { get; set; }
+        public int Rating { get; set; }
     }
 }

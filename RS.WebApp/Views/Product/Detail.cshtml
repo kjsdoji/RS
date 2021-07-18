@@ -3,6 +3,14 @@
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var culture = CultureInfo.CurrentCulture;
+    var ratingSum = ViewBag.RatingSum;
+    var ratingCount = ViewBag.RatingCount;
+    decimal rating = 0;
+    if (ratingCount > 0)
+    {
+        rating = (ratingSum / ratingCount);
+    }
+    var totalRating = decimal.Parse(rating.ToString());
 }
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
 @inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
@@ -85,7 +93,42 @@
         <a href="#" name="detail"></a>
         <hr class="soft" />
     </div>
-
+    <!-- Review ========================================================================= -->
+    <div>
+        <div>
+            <span class="starFadeN" id="sRate1"></span>
+            <span class="starFadeN" id="sRate2"></span>
+            <span class="starFadeN" id="sRate3"></span>
+            <span class="starFadeN" id="sRate4"></span>
+            <span class="starFadeN" id="sRate5"></span>
+        </div>
+        @if (Model.ProductReviews != null)
+        {
+            @foreach (var item in Model.ProductReviews)
+            {
+                <hr />
+                <div class="row">
+                    <div class="col-md-3">
+                        <i>@item.PublishedDate</i>
+                        <br />
+                        @for (int i = 0; i < item.Rating; i++)
+                        {
+                            <span class="starGlowN"></span>
+                        }
+                        @for (int i = (item.Rating + 1); i <= 5; i++)
+                        {
+                            <span class="starFadeN"></span>
+                        }
+                    </div>
+                    <div class="col-md-9">
+                        @Html.Raw(item.Comment.Replace("\n", "<br />"))
+                    </div>
+                </div>
+            }
+        }
+        @await Html.PartialAsync("_CommentBox")
+    </div>
+    <!-- Review End ===================================================================== -->
     <div class="span9">
         <ul id="productDetail" class="nav nav-tabs">
             <li class="active"><a href="#home" data-toggle="tab"><localize>Product Details</localize></a></li>
@@ -158,3 +201,62 @@
         </div>
     </div>
 </div>
+<style>
+    /* Product Review Start
+    -------------------------------------------------- */
+    .dl-horizontal dt {
+        white-space: normal;
+    }
+
+    input, select, textarea {
+        max-width: 280px;
+    }
+
+    .commentBox {
+        background-color: #efefef;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .starFade {
+        background-image: url("@(Configuration["BaseAddress"] + "/img/StarFade.jpg")");
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .starFadeN {
+        background-image: url('https://localhost:5001/img/StarFade.jpg');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
+
+    .starGlow {
+        background-image: url('https://localhost:5001/img/StarGlow.jpg');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .starGlowN {
+        background-image: url('https://localhost:5001/img/StarGlow.jpg');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
+    /* Product Review End
+    -------------------------------------------------- */
+</style>
+<script>
+    function SCRate() {
+        for (var i = 1; i <=@totalRating; i++) {
+            $("#sRate" + i).attr('class', 'starGlowN');
+        }
+    }
+    $(function () {
+        SCRate();
+    });
+</script>

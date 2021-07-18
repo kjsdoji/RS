@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RS.Services.Catalog.Products;
 using RS.ViewModels.Catalog.ProductImages;
+using RS.ViewModels.Catalog.ProductReviews;
 using RS.ViewModels.Catalog.Products;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,6 @@ namespace RS.BackendApi.Controllers
             return Ok(product);
         }
         // api/products/featured/vi/10
-        // GetFeaturedProducts
         [HttpGet("featured/{languageId}/{take}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetFeaturedProducts(int take, string languageId)
@@ -56,7 +56,6 @@ namespace RS.BackendApi.Controllers
         [Consumes("multipart/form-data")]
         //[Authorize]
         [AllowAnonymous]
-        // Create
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -108,7 +107,6 @@ namespace RS.BackendApi.Controllers
 
             return BadRequest();
         }
-        // Images
         [HttpPost("{productId}/images")]
         public async Task<IActionResult> CreateImage(int productId, [FromForm] ProductImageCreateRequest request)
         {
@@ -123,6 +121,21 @@ namespace RS.BackendApi.Controllers
             var image = await _productService.GetImageById(imageId);
 
             return CreatedAtAction(nameof(GetImageById), new { id = imageId }, image);
+        }
+        [HttpPost("{productId}/reviews")]
+        public async Task<IActionResult> CreateReview(int productId, [FromForm] ProductReviewCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var reviewId = await _productService.AddReview(productId, request);
+            if (reviewId == 0)
+                return BadRequest();
+
+            var review = await _productService.GetReviewById(reviewId);
+
+            return CreatedAtAction(nameof(GetReviewById), new { id = reviewId }, review);
         }
         [HttpPut("{productId}/images/{imageId}")]
         [Authorize]
@@ -159,6 +172,14 @@ namespace RS.BackendApi.Controllers
             if (image == null)
                 return BadRequest("Cannot find product");
             return Ok(image);
+        }
+        [HttpGet("{productId}/reviews/{reviewId}")]
+        public async Task<IActionResult> GetReviewById(int productId, int reviewId)
+        {
+            var review = await _productService.GetReviewById(reviewId);
+            if (review == null)
+                return BadRequest("Cannot find product");
+            return Ok(review);
         }
         [HttpPut("{id}/categories")]
         [Authorize]

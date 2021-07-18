@@ -17,7 +17,6 @@ namespace RS.ApiIntegration
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
         protected BaseApiClient(IHttpClientFactory httpClientFactory,
                    IHttpContextAccessor httpContextAccessor,
                     IConfiguration configuration)
@@ -26,7 +25,6 @@ namespace RS.ApiIntegration
             _httpContextAccessor = httpContextAccessor;
             _httpClientFactory = httpClientFactory;
         }
-
         protected async Task<TResponse> GetAsync<TResponse>(string url)
         {
             var sessions = _httpContextAccessor

@@ -17,7 +17,7 @@ namespace RS.Data.EF
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("YCCDb");
+            var connectionString = configuration.GetConnectionString("RSDb");
 
             var optionsBuilder = new DbContextOptionsBuilder<RSDbContext>();
             optionsBuilder.UseSqlServer(connectionString);

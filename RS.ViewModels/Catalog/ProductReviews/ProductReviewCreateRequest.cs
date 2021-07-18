@@ -6,8 +6,7 @@ namespace RS.ViewModels.Catalog.ProductReviews
 {
     public class ProductReviewCreateRequest
     {
-        public string ProductId { set; get; }
-        public string LanguageId { set; get; }
+        //public int ProductId { set; get; }
         public string Comment { get; set; }
         public int Rating { get; set; }
     }

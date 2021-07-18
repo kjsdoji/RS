@@ -67,13 +67,11 @@ namespace RS.WebApp.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
-
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Register(RegisterRequest registerRequest)
         {
@@ -109,7 +107,6 @@ namespace RS.WebApp.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
         private ClaimsPrincipal ValidateToken(string jwtToken)
         {
             IdentityModelEventSource.ShowPII = true;
