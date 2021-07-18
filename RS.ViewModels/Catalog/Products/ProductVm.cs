@@ -24,7 +24,7 @@ namespace RS.ViewModels.Catalog.Products
         public bool? IsFeatured { get; set; }
         public string ThumbnailImage { get; set; }
         public List<string> Categories { get; set; } = new List<string>();
-        // 1 ProductReview ? //
-        public List<ProductReview> ProductReviews { get; set; } = new List<ProductReview>();
+        public List<string> ProductComments { get; set; } = new List<string>();
+        public List<int> ProductRatings { get; set; } = new List<int>();
     }
 }

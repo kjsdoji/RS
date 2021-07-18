@@ -21,10 +21,10 @@ namespace RS.WebApp.Controllers
         public async Task<IActionResult> Detail(int id, string culture)
         {
             var product = await _productApiClient.GetById(id, culture);
-            var reviewCount = product.ProductReviews.Count();
+            var reviewCount = product.ProductComments.Count();
             if (reviewCount > 0)
             {
-                var ratingSum = product.ProductReviews.Sum(d => d.Rating);
+                var ratingSum = product.ProductRatings.Sum(r => r);
                 ViewBag.RatingSum = ratingSum;
                 ViewBag.RatingCount = reviewCount;
             }

@@ -102,29 +102,31 @@
             <span class="starFadeN" id="sRate4"></span>
             <span class="starFadeN" id="sRate5"></span>
         </div>
-        @if (Model.ProductReviews != null)
+        @if (Model.Product.ProductRatings != null)
         {
-            @foreach (var item in Model.ProductReviews)
-            {
-                <hr />
-                <div class="row">
-                    <div class="col-md-3">
-                        <i>@item.PublishedDate</i>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    @foreach (var item in Model.Product.ProductRatings)
+                    {
                         <br />
-                        @for (int i = 0; i < item.Rating; i++)
+                        @for (int i = 0; i < item; i++)
                         {
                             <span class="starGlowN"></span>
                         }
-                        @for (int i = (item.Rating + 1); i <= 5; i++)
+                        @for (int i = (item + 1); i <= 5; i++)
                         {
                             <span class="starFadeN"></span>
                         }
-                    </div>
-                    <div class="col-md-9">
-                        @Html.Raw(item.Comment.Replace("\n", "<br />"))
-                    </div>
+                    }
                 </div>
-            }
+                <div class="col-md-9">
+                    @foreach (var item in Model.Product.ProductComments)
+                    {
+                        @Html.Raw(item.Replace("\n", "<br />"))
+                    }
+                </div>
+            </div>
         }
         @await Html.PartialAsync("_CommentBox")
     </div>
@@ -252,8 +254,8 @@
 </style>
 <script>
     function SCRate() {
-        for (var i = 1; i <=@totalRating; i++) {
-            $("#sRate" + i).attr('class', 'starGlowN');
+        for (var i = 1; i <= @totalRating; i++) {
+            $("#sRate"+i).attr('class', 'starGlowN');
         }
     }
     $(function () {
