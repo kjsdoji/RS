@@ -185,7 +185,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "549fa52d-89d8-4e3f-b44d-e6e6e02b7ae9",
+                            ConcurrencyStamp = "98cf7da6-9176-490e-8821-d2b302b98bc6",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -193,7 +193,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"),
-                            ConcurrencyStamp = "4e1b1293-79ce-4049-aa9c-e13e0ac03166",
+                            ConcurrencyStamp = "98eefb2a-fade-4ed8-86f7-633571640a8e",
                             Description = "User role",
                             Name = "user",
                             NormalizedName = "user"
@@ -270,7 +270,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "137eb742-1c88-4cd9-9766-c96c3ae62dfe",
+                            ConcurrencyStamp = "e4791daa-e68c-49f1-8c25-f561d23e2407",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -279,7 +279,7 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI5/1WrohauzzhnMmWyWB/MjVJEoLCwC5DO3MKfJQoyjD8NARfrr/TwdAm865DXswg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENIwlbwOyzsOzE+hijxx2IflQKoqOsVql4POcDhlU19OtSgVeWuZmien0xYqUO0mJg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -289,7 +289,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "889ab489-539a-4990-9db9-836a012a577d",
+                            ConcurrencyStamp = "0b8f9d67-dc61-4a86-bc99-698edb990a03",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -298,7 +298,7 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDM60T5TG/3XNYt5jtt1rxC4kF5rORUZhmz/XQxwzfB5n5uJCJOODlSsBsDTHurvEw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOnogdQ0SpPR/UNWun8Ih6CwLTOS00HoS22kL3K6uesrayMIX4dnOgEH5if6XlveuQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -435,8 +435,8 @@ namespace RS.Data.Migrations
                             LanguageId = "vi",
                             Name = "Áo nam",
                             SeoAlias = "ao-nam",
-                            SeoDescription = "Sản phẩm áo thời trang nam",
-                            SeoTitle = "Sản phẩm áo thời trang nam"
+                            SeoDescription = "áo thời trang nam",
+                            SeoTitle = "áo thời trang nam"
                         },
                         new
                         {
@@ -445,8 +445,8 @@ namespace RS.Data.Migrations
                             LanguageId = "en",
                             Name = "Men Shirt",
                             SeoAlias = "men-shirt",
-                            SeoDescription = "The shirt products for men",
-                            SeoTitle = "The shirt products for men"
+                            SeoDescription = "The shirt for men",
+                            SeoTitle = "The shirt for men"
                         },
                         new
                         {
@@ -455,8 +455,8 @@ namespace RS.Data.Migrations
                             LanguageId = "vi",
                             Name = "Áo nữ",
                             SeoAlias = "ao-nu",
-                            SeoDescription = "Sản phẩm áo thời trang nữ",
-                            SeoTitle = "Sản phẩm áo thời trang women"
+                            SeoDescription = "áo thời trang nữ",
+                            SeoTitle = "áo thời trang nữ"
                         },
                         new
                         {
@@ -465,8 +465,8 @@ namespace RS.Data.Migrations
                             LanguageId = "en",
                             Name = "Women Shirt",
                             SeoAlias = "women-shirt",
-                            SeoDescription = "The shirt products for women",
-                            SeoTitle = "The shirt products for women"
+                            SeoDescription = "The shirt for women",
+                            SeoTitle = "The shirt for women"
                         });
                 });
 
@@ -646,7 +646,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 7, 11, 14, 14, 35, 479, DateTimeKind.Local).AddTicks(2623),
+                            DateCreated = new DateTime(2021, 7, 17, 17, 50, 59, 945, DateTimeKind.Local).AddTicks(1307),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -725,7 +725,7 @@ namespace RS.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comments")
+                    b.Property<string>("Comment")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -798,26 +798,26 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Áo sơ mi nam trắng Việt Tiến",
-                            Details = "Áo sơ mi nam trắng Việt Tiến",
+                            Description = "Áo sơ mi nam",
+                            Details = "Áo sơ mi nam",
                             LanguageId = "vi",
-                            Name = "Áo sơ mi nam trắng Việt Tiến",
+                            Name = "Áo sơ mi nam",
                             ProductId = 1,
-                            SeoAlias = "ao-so-mi-nam-trang-viet-tien",
-                            SeoDescription = "Áo sơ mi nam trắng Việt Tiến",
-                            SeoTitle = "Áo sơ mi nam trắng Việt Tiến"
+                            SeoAlias = "ao-so-mi-nam",
+                            SeoDescription = "Áo sơ mi nam",
+                            SeoTitle = "Áo sơ mi nam"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "Viet Tien Men T-Shirt",
-                            Details = "Viet Tien Men T-Shirt",
+                            Description = "Men T-Shirt",
+                            Details = "Men T-Shirt",
                             LanguageId = "en",
-                            Name = "Viet Tien Men T-Shirt",
+                            Name = "Men T-Shirt",
                             ProductId = 1,
-                            SeoAlias = "viet-tien-men-t-shirt",
-                            SeoDescription = "Viet Tien Men T-Shirt",
-                            SeoTitle = "Viet Tien Men T-Shirt"
+                            SeoAlias = "men-t-shirt",
+                            SeoDescription = "Men T-Shirt",
+                            SeoTitle = "Men T-Shirt"
                         });
                 });
 
@@ -906,8 +906,8 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-                            Image = "/themes/images/carousel/1.png",
+                            Description = "Cras justo odio",
+                            Image = "/slides/slide-01.jpg",
                             Name = "Second Thumbnail label",
                             SortOrder = 1,
                             Status = 1,
@@ -916,8 +916,8 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-                            Image = "/themes/images/carousel/2.png",
+                            Description = "Cras justo odio",
+                            Image = "/slides/slide-02.jpg",
                             Name = "Second Thumbnail label",
                             SortOrder = 2,
                             Status = 1,
@@ -926,8 +926,8 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-                            Image = "/themes/images/carousel/3.png",
+                            Description = "Cras justo odio",
+                            Image = "/slides/slide-03.jpg",
                             Name = "Second Thumbnail label",
                             SortOrder = 3,
                             Status = 1,
@@ -936,8 +936,8 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 4,
-                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-                            Image = "/themes/images/carousel/4.png",
+                            Description = "Cras justo odio",
+                            Image = "/slides/slide-04.jpg",
                             Name = "Second Thumbnail label",
                             SortOrder = 4,
                             Status = 1,
@@ -946,8 +946,8 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 5,
-                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-                            Image = "/themes/images/carousel/5.png",
+                            Description = "Cras justo odio",
+                            Image = "/slides/slide-05.jpg",
                             Name = "Second Thumbnail label",
                             SortOrder = 5,
                             Status = 1,
@@ -956,8 +956,8 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 6,
-                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-                            Image = "/themes/images/carousel/6.png",
+                            Description = "Cras justo odio",
+                            Image = "/slides/slide-06.jpg",
                             Name = "Second Thumbnail label",
                             SortOrder = 6,
                             Status = 1,

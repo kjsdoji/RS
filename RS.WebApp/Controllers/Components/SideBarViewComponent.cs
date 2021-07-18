@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RS.ApiIntegration;
+﻿using RS.ApiIntegration;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RS.WebApp.Controllers.Components
+namespace YCC.WebApp.Controllers.Components
 {
     public class SideBarViewComponent : ViewComponent
     {

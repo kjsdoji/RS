@@ -8,7 +8,8 @@ namespace RS.ViewModels.Catalog.ProductReviews
     public class ProductReviewViewModel
     {
         public int Id { get; set; }
-        //public string ProductName { get; set; }
+        //public string Title { get; set; }
+        //public List<ProductReview> ListofReviews {get; set;}
         public DateTime PublishedDate { get; set; }
         public string Comment { get; set; }
         public int ProductId { get; set; }

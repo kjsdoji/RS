@@ -71,22 +71,20 @@ namespace RS.ApiIntegration
             var response = await client.PostAsync($"/api/products/", requestContent);
             return response.IsSuccessStatusCode;
         }
-        public async Task<bool> AddReview(ProductReviewCreateRequest request)
+        public async Task<bool> AddReview(int productId, ProductReviewCreateRequest request)
         {
             var sessions = _httpContextAccessor
                 .HttpContext
                 .Session
                 .GetString(SystemConstants.AppSettings.Token);
-            var languageId = _httpContextAccessor.HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration[SystemConstants.AppSettings.BaseAddress]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
             var requestContent = new MultipartFormDataContent();
             requestContent.Add(new StringContent(request.Comment), "Comment");
-            requestContent.Add(new StringContent(request.ProductId.ToString()), "ProductId");
-            requestContent.Add(new StringContent(languageId), "languageId");
+            requestContent.Add(new StringContent(productId.ToString()), "ProductId");
             requestContent.Add(new StringContent(request.Rating.ToString()), "Rating");
-            var response = await client.PostAsync($"/api/products/"+request.ProductId, requestContent);
+            var response = await client.PostAsync($"/api/products/"+productId+$"reviews", requestContent);
             return response.IsSuccessStatusCode;
         }
         public async Task<bool> UpdateProduct(ProductUpdateRequest request)

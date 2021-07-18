@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RS.Data.Migrations
 {
-    public partial class SeedData : Migration
+    public partial class AddData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -401,7 +401,7 @@ namespace RS.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Comments = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     PublishedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false)
@@ -490,8 +490,8 @@ namespace RS.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "549fa52d-89d8-4e3f-b44d-e6e6e02b7ae9", "Administrator role", "admin", "admin" },
-                    { new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"), "4e1b1293-79ce-4049-aa9c-e13e0ac03166", "User role", "user", "user" }
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "98cf7da6-9176-490e-8821-d2b302b98bc6", "Administrator role", "admin", "admin" },
+                    { new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"), "98eefb2a-fade-4ed8-86f7-633571640a8e", "User role", "user", "user" }
                 });
 
             migrationBuilder.InsertData(
@@ -508,8 +508,8 @@ namespace RS.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, "137eb742-1c88-4cd9-9766-c96c3ae62dfe", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "Admin", "Ad", false, null, "admin@gmail.com", "admin", "AQAAAAEAACcQAAAAEI5/1WrohauzzhnMmWyWB/MjVJEoLCwC5DO3MKfJQoyjD8NARfrr/TwdAm865DXswg==", null, false, "", false, "admin" },
-                    { new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"), 0, "889ab489-539a-4990-9db9-836a012a577d", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user@gmail.com", true, "User", "Us", false, null, "user@gmail.com", "user", "AQAAAAEAACcQAAAAEDM60T5TG/3XNYt5jtt1rxC4kF5rORUZhmz/XQxwzfB5n5uJCJOODlSsBsDTHurvEw==", null, false, "", false, "user" }
+                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, "e4791daa-e68c-49f1-8c25-f561d23e2407", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "Admin", "Ad", false, null, "admin@gmail.com", "admin", "AQAAAAEAACcQAAAAENIwlbwOyzsOzE+hijxx2IflQKoqOsVql4POcDhlU19OtSgVeWuZmien0xYqUO0mJg==", null, false, "", false, "admin" },
+                    { new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"), 0, "0b8f9d67-dc61-4a86-bc99-698edb990a03", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user@gmail.com", true, "User", "Us", false, null, "user@gmail.com", "user", "AQAAAAEAACcQAAAAEOnogdQ0SpPR/UNWun8Ih6CwLTOS00HoS22kL3K6uesrayMIX4dnOgEH5if6XlveuQ==", null, false, "", false, "user" }
                 });
 
             migrationBuilder.InsertData(
@@ -533,19 +533,19 @@ namespace RS.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "DateCreated", "IsFeatured", "OriginalPrice", "Price" },
-                values: new object[] { 1, new DateTime(2021, 7, 11, 14, 14, 35, 479, DateTimeKind.Local).AddTicks(2623), null, 100000m, 200000m });
+                values: new object[] { 1, new DateTime(2021, 7, 17, 17, 50, 59, 945, DateTimeKind.Local).AddTicks(1307), null, 100000m, 200000m });
 
             migrationBuilder.InsertData(
                 table: "Slides",
                 columns: new[] { "Id", "Description", "Image", "Name", "SortOrder", "Status", "Url" },
                 values: new object[,]
                 {
-                    { 1, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "/themes/images/carousel/1.png", "Second Thumbnail label", 1, 1, "#" },
-                    { 2, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "/themes/images/carousel/2.png", "Second Thumbnail label", 2, 1, "#" },
-                    { 3, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "/themes/images/carousel/3.png", "Second Thumbnail label", 3, 1, "#" },
-                    { 4, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "/themes/images/carousel/4.png", "Second Thumbnail label", 4, 1, "#" },
-                    { 5, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "/themes/images/carousel/5.png", "Second Thumbnail label", 5, 1, "#" },
-                    { 6, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "/themes/images/carousel/6.png", "Second Thumbnail label", 6, 1, "#" }
+                    { 1, "Cras justo odio", "/slides/slide-01.jpg", "Second Thumbnail label", 1, 1, "#" },
+                    { 2, "Cras justo odio", "/slides/slide-02.jpg", "Second Thumbnail label", 2, 1, "#" },
+                    { 3, "Cras justo odio", "/slides/slide-03.jpg", "Second Thumbnail label", 3, 1, "#" },
+                    { 4, "Cras justo odio", "/slides/slide-04.jpg", "Second Thumbnail label", 4, 1, "#" },
+                    { 5, "Cras justo odio", "/slides/slide-05.jpg", "Second Thumbnail label", 5, 1, "#" },
+                    { 6, "Cras justo odio", "/slides/slide-06.jpg", "Second Thumbnail label", 6, 1, "#" }
                 });
 
             migrationBuilder.InsertData(
@@ -553,10 +553,10 @@ namespace RS.Data.Migrations
                 columns: new[] { "Id", "CategoryId", "LanguageId", "Name", "SeoAlias", "SeoDescription", "SeoTitle" },
                 values: new object[,]
                 {
-                    { 1, 1, "vi", "Áo nam", "ao-nam", "Sản phẩm áo thời trang nam", "Sản phẩm áo thời trang nam" },
-                    { 3, 2, "vi", "Áo nữ", "ao-nu", "Sản phẩm áo thời trang nữ", "Sản phẩm áo thời trang women" },
-                    { 2, 1, "en", "Men Shirt", "men-shirt", "The shirt products for men", "The shirt products for men" },
-                    { 4, 2, "en", "Women Shirt", "women-shirt", "The shirt products for women", "The shirt products for women" }
+                    { 1, 1, "vi", "Áo nam", "ao-nam", "áo thời trang nam", "áo thời trang nam" },
+                    { 3, 2, "vi", "Áo nữ", "ao-nu", "áo thời trang nữ", "áo thời trang nữ" },
+                    { 2, 1, "en", "Men Shirt", "men-shirt", "The shirt for men", "The shirt for men" },
+                    { 4, 2, "en", "Women Shirt", "women-shirt", "The shirt for women", "The shirt for women" }
                 });
 
             migrationBuilder.InsertData(
@@ -569,8 +569,8 @@ namespace RS.Data.Migrations
                 columns: new[] { "Id", "Description", "Details", "LanguageId", "Name", "ProductId", "SeoAlias", "SeoDescription", "SeoTitle" },
                 values: new object[,]
                 {
-                    { 1, "Áo sơ mi nam trắng Việt Tiến", "Áo sơ mi nam trắng Việt Tiến", "vi", "Áo sơ mi nam trắng Việt Tiến", 1, "ao-so-mi-nam-trang-viet-tien", "Áo sơ mi nam trắng Việt Tiến", "Áo sơ mi nam trắng Việt Tiến" },
-                    { 2, "Viet Tien Men T-Shirt", "Viet Tien Men T-Shirt", "en", "Viet Tien Men T-Shirt", 1, "viet-tien-men-t-shirt", "Viet Tien Men T-Shirt", "Viet Tien Men T-Shirt" }
+                    { 1, "Áo sơ mi nam", "Áo sơ mi nam", "vi", "Áo sơ mi nam", 1, "ao-so-mi-nam", "Áo sơ mi nam", "Áo sơ mi nam" },
+                    { 2, "Men T-Shirt", "Men T-Shirt", "en", "Men T-Shirt", 1, "men-t-shirt", "Men T-Shirt", "Men T-Shirt" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -13,7 +13,7 @@ namespace RS.ApiIntegration
     {
         Task<PagedResult<ProductVm>> GetPagings(GetManageProductPagingRequest request);
         Task<bool> CreateProduct(ProductCreateRequest request);
-        Task<bool> AddReview(ProductReviewCreateRequest request);
+        Task<bool> AddReview(int productId, ProductReviewCreateRequest request);
         Task<bool> UpdateProduct(ProductUpdateRequest request);
         Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
         Task<ProductVm> GetById(int id, string languageId);
