@@ -16,12 +16,9 @@ namespace RS.Data.EF
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-
             var connectionString = configuration.GetConnectionString("RSDb");
-
             var optionsBuilder = new DbContextOptionsBuilder<RSDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
-
             return new RSDbContext(optionsBuilder.Options);
         }
     }

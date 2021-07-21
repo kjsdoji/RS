@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using RS.ApiIntegration;
 using RS.ViewModels.Catalog.ProductReviews;
 using System;
@@ -12,11 +13,9 @@ namespace RS.WebApp.Controllers
     public class ProductReviewController : Controller
     {
         private readonly IProductApiClient _productApiClient;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public ProductReviewController(IProductApiClient productApiClient, IHttpContextAccessor httpContextAccessor )
+        public ProductReviewController(IProductApiClient productApiClient)
         {
             _productApiClient = productApiClient;
-            _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Index()
         {
@@ -25,10 +24,8 @@ namespace RS.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(int productId, ProductReviewCreateRequest createReviewRequest)
         {
-            string host = _httpContextAccessor.HttpContext.Request.Host.Value;
-            Console.WriteLine(host);
             await _productApiClient.AddReview(productId, createReviewRequest);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Detail", "Product", new {id = productId});
         }
     }
 }

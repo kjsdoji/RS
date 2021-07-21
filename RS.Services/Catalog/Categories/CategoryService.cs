@@ -12,12 +12,10 @@ namespace RS.Services.Catalog.Categories
     public class CategoryService : ICategoryService
     {
         private readonly RSDbContext _context;
-
         public CategoryService(RSDbContext context)
         {
             _context = context;
         }
-
         public async Task<List<CategoryVm>> GetAll(string languageId)
         {
             var query = from c in _context.Categories
@@ -31,7 +29,6 @@ namespace RS.Services.Catalog.Categories
                 ParentId = x.c.ParentId
             }).ToListAsync();
         }
-
         public async Task<CategoryVm> GetById(string languageId, int id)
         {
             var query = from c in _context.Categories

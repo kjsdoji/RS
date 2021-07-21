@@ -84,7 +84,7 @@ namespace RS.ApiIntegration
             requestContent.Add(new StringContent(request.Comment), "Comment");
             requestContent.Add(new StringContent(productId.ToString()), "ProductId");
             requestContent.Add(new StringContent(request.Rating.ToString()), "Rating");
-            var response = await client.PostAsync($"/api/products/"+productId+$"reviews", requestContent);
+            var response = await client.PostAsync($"/api/products/"+productId+$"/reviews", requestContent);
             return response.IsSuccessStatusCode;
         }
         public async Task<bool> UpdateProduct(ProductUpdateRequest request)

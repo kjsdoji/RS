@@ -23,8 +23,8 @@ namespace RS.BackendApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll(string languageId)
         {
-            var products = await _categoryService.GetAll(languageId);
-            return Ok(products);
+            var categories = await _categoryService.GetAll(languageId);
+            return Ok(categories);
         }
 
         [HttpGet("{id}/{languageId}")]

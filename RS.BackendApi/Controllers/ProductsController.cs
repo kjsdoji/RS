@@ -63,11 +63,9 @@ namespace RS.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
             var productId = await _productService.Create(request);
-            if (productId == 0)
+            if (productId == 0) 
                 return BadRequest();
-
             var product = await _productService.GetById(productId, request.LanguageId);
-
             return CreatedAtAction(nameof(GetById), new { id = productId }, product);
         }
         [HttpPut("{productId}")]
@@ -108,6 +106,7 @@ namespace RS.BackendApi.Controllers
             return BadRequest();
         }
         [HttpPost("{productId}/images")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateImage(int productId, [FromForm] ProductImageCreateRequest request)
         {
             if (!ModelState.IsValid)
