@@ -38,20 +38,20 @@ namespace RS.Services.Catalog.Products
                         select new { p, pt, pic };
             var data = await query.Select(x => new ProductVm()
                 {
-                    Id = x.p.Id,
-                    Name = x.pt.Name,
-                    DateCreated = x.p.DateCreated,
-                    Description = x.pt.Description,
-                    Details = x.pt.Details,
-                    LanguageId = x.pt.LanguageId,
-                    OriginalPrice = x.p.OriginalPrice,
-                    Price = x.p.Price,
-                    SeoAlias = x.pt.SeoAlias,
-                    SeoDescription = x.pt.SeoDescription,
-                    SeoTitle = x.pt.SeoTitle,
-                    Stock = x.p.Stock,
-                    ViewCount = x.p.ViewCount
-                }).ToListAsync();
+                Id = x.p.Id,
+                Name = x.pt.Name,
+                DateCreated = x.p.DateCreated,
+                Description = x.pt.Description,
+                Details = x.pt.Details,
+                LanguageId = x.pt.LanguageId,
+                OriginalPrice = x.p.OriginalPrice,
+                Price = x.p.Price,
+                SeoAlias = x.pt.SeoAlias,
+                SeoDescription = x.pt.SeoDescription,
+                SeoTitle = x.pt.SeoTitle,
+                Stock = x.p.Stock,
+                ViewCount = x.p.ViewCount
+            }).ToListAsync();
             return data;
         }
         public async Task<int> AddImage(int productId, ProductImageCreateRequest request)
@@ -167,7 +167,6 @@ namespace RS.Services.Catalog.Products
         }
         public async Task<PagedResult<ProductVm>> GetAllPaging(GetManageProductPagingRequest request)
         {
-            //1. Select join
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
                         join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
@@ -176,14 +175,13 @@ namespace RS.Services.Catalog.Products
                         from c in picc.DefaultIfEmpty()
                         join pi in _context.ProductImages on p.Id equals pi.ProductId into ppi
                         from pi in ppi.DefaultIfEmpty()
-                        where pt.LanguageId == request.LanguageId && pi.IsDefault == true
+                        where pt.LanguageId == request.LanguageId
                         select new { p, pt, pic, pi };
-            //2. Filter
+            // && pi.IsDefault == true
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
             if (request.CategoryId != null && request.CategoryId != 0)
                 query = query.Where(p => p.pic.CategoryId == request.CategoryId);
-            //3. Paging
             int totalRow = await query.CountAsync();
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
@@ -204,7 +202,8 @@ namespace RS.Services.Catalog.Products
                     ViewCount = x.p.ViewCount,
                     ThumbnailImage = x.pi.ImagePath
                 }).ToListAsync();
-            //4. Select and projection
+            // Keyword, LanguageId, CategoryId. PageIndex, PageSize
+            // List<ProductVm>. PageIndex, PageSize, TotalRecords, PageCount
             var pagedResult = new PagedResult<ProductVm>()
             {
                 TotalRecords = totalRow,
@@ -247,7 +246,10 @@ namespace RS.Services.Catalog.Products
                 Categories = categories,
                 ThumbnailImage = image != null ? image.ImagePath : "no-image.jpg",
                 ProductComments = comments,
-                ProductRatings = ratings
+                ProductRatings = ratings,
+
+                Types = 1,
+                ImagePath = image != null ? image.ImagePath : "no-image.jpg"
             };
             return productViewModel;
         }

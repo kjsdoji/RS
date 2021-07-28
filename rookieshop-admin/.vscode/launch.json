@@ -1,0 +1,16 @@
+{
+   "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "preLaunchTask": "start-react-app",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:5005",
+            "webRoot": "${workspaceFolder}/rookieshop-admin/src",
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+              }
+        }
+    ]
+}

@@ -22,6 +22,13 @@ namespace RS.BackendApi.Controllers
         {
             _productService = productService;
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllTest()
+        {
+            var products = await _productService.GetAllTest();
+            return Ok(products);
+        }
+
         [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetManageProductPagingRequest request)
         {
@@ -39,14 +46,12 @@ namespace RS.BackendApi.Controllers
         }
         // api/products/featured/vi/10
         [HttpGet("featured/{languageId}/{take}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetFeaturedProducts(int take, string languageId)
         {
             var products = await _productService.GetFeaturedProducts(languageId, take);
             return Ok(products);
         }
         [HttpGet("latest/{languageId}/{take}")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetLatestProducts(int take, string languageId)
         {
             var products = await _productService.GetLatestProducts(languageId, take);
@@ -54,8 +59,6 @@ namespace RS.BackendApi.Controllers
         }
         [HttpPost]
         [Consumes("multipart/form-data")]
-        //[Authorize]
-        [AllowAnonymous]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -70,7 +73,6 @@ namespace RS.BackendApi.Controllers
         }
         [HttpPut("{productId}")]
         [Consumes("multipart/form-data")]
-        [Authorize]
         public async Task<IActionResult> Update([FromRoute] int productId, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)
@@ -85,18 +87,15 @@ namespace RS.BackendApi.Controllers
         }
         // api/products/1
         [HttpDelete("{productId}")]
-        //[Authorize]
-        [AllowAnonymous]
         public async Task<IActionResult> Delete(int productId)
         {
             var affectedResult = await _productService.Delete(productId);
             if (affectedResult == 0)
                 return BadRequest();
-            return Ok();
+            return Ok(true);
         }
         // api/products/1/10000
         [HttpPatch("{productId}/{newPrice}")]
-        [Authorize]
         public async Task<IActionResult> UpdatePrice(int productId, decimal newPrice)
         {
             var isSuccessful = await _productService.UpdatePrice(productId, newPrice);
@@ -106,7 +105,6 @@ namespace RS.BackendApi.Controllers
             return BadRequest();
         }
         [HttpPost("{productId}/images")]
-        [AllowAnonymous]
         public async Task<IActionResult> CreateImage(int productId, [FromForm] ProductImageCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -137,7 +135,6 @@ namespace RS.BackendApi.Controllers
             return CreatedAtAction(nameof(GetReviewById), new { id = reviewId }, review);
         }
         [HttpPut("{productId}/images/{imageId}")]
-        [Authorize]
         public async Task<IActionResult> UpdateImage(int imageId, [FromForm] ProductImageUpdateRequest request)
         {
             if (!ModelState.IsValid)
@@ -151,7 +148,6 @@ namespace RS.BackendApi.Controllers
             return Ok();
         }
         [HttpDelete("{productId}/images/{imageId}")]
-        [Authorize]
         public async Task<IActionResult> RemoveImage(int imageId)
         {
             if (!ModelState.IsValid)
@@ -181,7 +177,6 @@ namespace RS.BackendApi.Controllers
             return Ok(review);
         }
         [HttpPut("{id}/categories")]
-        [Authorize]
         public async Task<IActionResult> CategoryAssign(int id, [FromBody] CategoryAssignRequest request)
         {
             if (!ModelState.IsValid)

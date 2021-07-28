@@ -1,0 +1,10 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "label": "start-react-app",
+            "command": "npm run build",
+            "type": "shell"
+        }
+	]
+}

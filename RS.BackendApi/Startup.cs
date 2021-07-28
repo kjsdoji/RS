@@ -115,6 +115,19 @@ namespace RS.BackendApi
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:5001")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -129,6 +142,7 @@ namespace RS.BackendApi
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCors("AllowOrigins");
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();

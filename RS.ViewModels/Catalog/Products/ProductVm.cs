@@ -26,5 +26,12 @@ namespace RS.ViewModels.Catalog.Products
         public List<string> Categories { get; set; } = new List<string>();
         public List<string> ProductComments { get; set; } = new List<string>();
         public List<int> ProductRatings { get; set; } = new List<int>();
+
+        //public int Id { set; get; }
+        //public string Name { set; get; }
+        public int Types { get; set; }
+        public string ImagePath { get; set; }
+        public string ImageFile { get; set; }
+        //
     }
 }
