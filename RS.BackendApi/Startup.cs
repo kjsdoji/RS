@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RS.BackendApi.Services;
 using RS.Data.EF;
 using RS.Data.Entities;
 using RS.Services.Catalog.Categories;
@@ -46,6 +47,7 @@ namespace RS.BackendApi
                 .AddDefaultTokenProviders();
             
             services.AddTransient<IStorageService, FileStorageService>();
+            services.AddTransient<IFileStorageService, FileStorageService1>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
@@ -55,7 +57,9 @@ namespace RS.BackendApi
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IUserService, UserService>();
-            
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
             services.AddSwaggerGen(c =>
@@ -115,6 +119,17 @@ namespace RS.BackendApi
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -131,6 +146,7 @@ namespace RS.BackendApi
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
+            app.UseCors("AllowOrigins");
             app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

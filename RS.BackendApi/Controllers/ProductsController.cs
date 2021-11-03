@@ -28,15 +28,16 @@ namespace RS.BackendApi.Controllers
             var products = await _productService.GetAllPaging(request);
             return Ok(products);
         }
-        // api/producs/vi/1
+        
         [HttpGet("{productId}/{languageId}")]
-        public async Task<IActionResult> GetById(int productId, string languageId)
+        public IActionResult GetById(int productId, string languageId)
         {
-            var product = await _productService.GetById(productId, languageId);
+            var product = _productService.GetById(productId, languageId).Result;
             if (product == null)
                 return BadRequest("Cannot find product");
             return Ok(product);
         }
+
         // api/products/featured/vi/10
         [HttpGet("featured/{languageId}/{take}")]
         [AllowAnonymous]
