@@ -3,5 +3,6 @@ export default interface IBrand {
     name: string,
     type: number,
     imagePath?: string,
-    imageFile?: Blob
+    imageFile?: Blob,
+    description: string
 }

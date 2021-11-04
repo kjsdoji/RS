@@ -18,40 +18,47 @@ namespace RS.Data.Extensions
                 {
                     Id = 1,
                     Name = "Test Brand 1",
-                    Type = (int)BrandTypeEnum.Normal
+                    Type = (int)BrandTypeEnum.Normal,
+                    Description = "Description"
                 },
                 new Brand
                 {
                     Id = 2,
                     Name = "Test Brand 2",
-                    Type = (int)BrandTypeEnum.Normal
+                    Type = (int)BrandTypeEnum.Normal,
+                    Description = "Description"
                 },
                 new Brand
                 {
                     Id = 3,
                     Name = "Test Brand 3",
-                    Type = (int)BrandTypeEnum.Normal
+                    Type = (int)BrandTypeEnum.Normal,
+                    Description = "Description"
                 },
                 new Brand
                 {
                     Id = 4,
                     Name = "Test Brand 4",
-                    Type = (int)BrandTypeEnum.Luxury
+                    Type = (int)BrandTypeEnum.Luxury,
+                    Description = "Description"
                 },
                 new Brand
                 {
                     Id = 5,
                     Name = "Test Brand 5",
-                    Type = (int)BrandTypeEnum.Luxury
+                    Type = (int)BrandTypeEnum.Luxury,
+                    Description = "Description"
                 },
                 new Brand
                 {
                     Id = 6,
                     Name = "Test Brand 6",
-                    Type = (int)BrandTypeEnum.Luxury
+                    Type = (int)BrandTypeEnum.Luxury,
+                    Description = "Description"
                 }
             );
             #endregion
+
             modelBuilder.Entity<AppConfig>().HasData(
                 new AppConfig() { Key = "HomeTitle", Value = "This is home page of Rookie Shop" },
                 new AppConfig() { Key = "HomeKeyword", Value = "This is keyword of Rookie Shop" },

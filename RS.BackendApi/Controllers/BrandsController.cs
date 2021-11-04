@@ -72,7 +72,7 @@ namespace RS.BackendApi.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult<BrandVm>> GetBrand(int id)
         {
             var brand = await _context
@@ -90,7 +90,8 @@ namespace RS.BackendApi.Controllers
                 Id = brand.Id,
                 Name = brand.Name,
                 Type = (int)brand.Type,
-                ImagePath = _fileStorageService.GetFileUrl(brand.ImageName)
+                ImagePath = _fileStorageService.GetFileUrl(brand.ImageName),
+                Description = brand.Description
             };
 
             return brandVm;
@@ -98,7 +99,7 @@ namespace RS.BackendApi.Controllers
 
         [HttpPut("{id}")]
         [AllowAnonymous]
-        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult> PutBrand([FromRoute] int id, [FromForm] BrandCreateRequest brandCreateRequest)
         {
             var brand = await _context.Brands.FindAsync(id);
@@ -123,7 +124,7 @@ namespace RS.BackendApi.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<ActionResult<BrandVm>> PostBrand([FromForm] BrandCreateRequest brandCreateRequest)
         {
             var brand = new Brand
@@ -146,7 +147,7 @@ namespace RS.BackendApi.Controllers
 
         [HttpDelete("{id}")]
         [AllowAnonymous]
-        [Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
+        //[Authorize(Policy = SecurityConstants.ADMIN_ROLE_POLICY)]
         public async Task<IActionResult> DeleteBrand(int id)
         {
             var brand = await _context.Brands.FindAsync(id);

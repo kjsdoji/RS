@@ -8,7 +8,7 @@ namespace RS.BackendApi.Helpers
 {
     public static class ImageHelper
     {
-        private const string IMAGE_FOLDER_NAME = "image";
+        private const string IMAGE_FOLDER_NAME = "img";
         public static string GetFileUrl(string fileName)
         {
             var url = string.Empty;

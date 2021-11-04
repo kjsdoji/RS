@@ -13,5 +13,6 @@ namespace RS.Data.Entities
         public int Type { get; set; }
         public string ImageName { get; set; }
         public bool IsDeleted { get; set; }
+        public string Description { get; set; }
     }
 }

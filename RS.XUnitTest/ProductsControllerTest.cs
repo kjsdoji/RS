@@ -50,7 +50,7 @@ namespace RS.XUnitTest
             //Assert
 
             Assert.IsAssignableFrom<IActionResult>(result);
-            mockProductService.VerifyGetById(Times.Once(), 1, "en");
+            mockProductService.VerifyGetById(Times.Once(), 2, "en");
         }
     }
 }

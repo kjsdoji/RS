@@ -24,7 +24,8 @@ import { disableBrand } from "../reducer";
 const columns: IColumnOption[] = [
   { columnName: "id", columnValue: "Id" },
   { columnName: "name", columnValue: "Name" },
-  { columnName: "type", columnValue: "Type" }
+  { columnName: "type", columnValue: "Type" },
+  { columnName: "description", columnValue: "Description" }
 ];
 
 type Props = {
@@ -139,6 +140,7 @@ const BrandTable: React.FC<Props> = ({
             <td>{data.id}</td>
             <td>{data.name}</td>
             <td>{getBrandTypeName(data.type)}</td>
+            <td>{data.description}</td>
 
             <td className="d-flex">
               <ButtonIcon onClick={() => handleEdit(data.id)}>
