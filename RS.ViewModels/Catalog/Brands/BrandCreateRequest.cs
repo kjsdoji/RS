@@ -11,6 +11,7 @@ namespace RS.ViewModels.Catalog.Brands
     public class BrandCreateRequest
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public BrandTypeEnum Type { get; set; }
         public IFormFile ImageFile { get; set; }
     }

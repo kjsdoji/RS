@@ -4,18 +4,18 @@ import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 
-import TextField from 'src/components/FormInputs/TextField';
-import DateField from 'src/components/FormInputs/DateField';
-import CheckboxField from 'src/components/FormInputs/CheckboxField';
-import SelectField from 'src/components/FormInputs/SelectField';
-import { BRAND } from 'src/constants/pages';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import TextField from '../../components/FormInputs/TextField';
+import DateField from '../../components/FormInputs/DateField';
+import CheckboxField from '../../components/FormInputs/CheckboxField';
+import SelectField from '../../components/FormInputs/SelectField';
+import { CATEGORY } from '../../constants/pages';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { createBrand, updateBrand } from './reducer';
-import IBrandForm from 'src/interfaces/Brand/IBrandForm';
-import { Status } from 'src/constants/status';
-import { NormalBrandType } from "src/constants/Brand/BrandConstants";
-import { BrandTypeOptions } from "src/constants/selectOptions";
-import FileUpload from 'src/components/FormInputs/FileUpload';
+import IBrandForm from '../../interfaces/Brand/IBrandForm';
+import {Status} from '../../constants/status';
+import { NormalBrandType } from "../../constants/Brand/BrandConstants";
+import { BrandTypeOptions } from "../../constants/selectOptions";
+import FileUpload from '../../components/FormInputs/FileUpload';
 
 const initialFormValues: IBrandForm = {
     name: '',
@@ -53,7 +53,7 @@ const BrandFormContainer: React.FC<Props> = ({ initialBrandForm = {
             );
 
             setTimeout(() => {
-                history.push(BRAND);
+                history.push(CATEGORY);
             }, 1000);
 
         } else {
@@ -113,7 +113,7 @@ const BrandFormContainer: React.FC<Props> = ({ initialBrandForm = {
                                 Save {(loading) && <img src="/oval.svg" className='w-4 h-4 ml-2 inline-block' />}
                             </button>
 
-                            <Link to={BRAND} className="btn btn-outline-secondary ml-2">
+                            <Link to={CATEGORY} className="btn btn-outline-secondary ml-2">
                                 Cancel
                             </Link>
                         </div>

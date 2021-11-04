@@ -20,7 +20,8 @@ const SideBar = () => {
       </NavLink>
 
       {
-        account?.profile.role === Roles.Admin && (
+        // account?.profile.role === Roles.Admin && (
+        (
           <div className=''>
             <NavLink className="navItem intro-x" to={BRAND}>
               <button className="btnCustom">Manage Brand</button>

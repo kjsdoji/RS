@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect, useParams } from 'react-router';
 
-import { NOTFOUND } from 'src/constants/pages';
-import { useAppSelector } from 'src/hooks/redux';
-import IBrandForm from 'src/interfaces/Brand/IBrandForm';
+import { NOTFOUND } from '../../../constants/pages';
+import { useAppSelector } from '../../../hooks/redux';
+import IBrandForm from '../../../interfaces/Brand/IBrandForm';
 import BrandForm from '../BrandForm';
 
 const UpdateBrandContainer = () => {

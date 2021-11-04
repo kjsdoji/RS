@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 
-import { HOME, AUTH, BRAND, LOGIN, UNAUTHORIZE } from '../constants/pages';
+import { HOME, AUTH, BRAND, LOGIN, UNAUTHORIZE, CATEGORY } from '../constants/pages';
 import InLineLoader from "../components/InlineLoader";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import LayoutRoute from "./LayoutRoute";
@@ -12,7 +12,9 @@ import PrivateRoute from "./PrivateRoute";
 const Home = lazy(() => import('../containers/Home'));
 const Login = lazy(() => import('../containers/Authorize'));
 const Brand = lazy(() => import('../containers/Brand'));
-const NotFound = lazy(() => import("../containers/NotFound"));
+const Brand1 = lazy(() => import('../containers/Category'));
+const NotFound = lazy(() => import("../containers/CategoryTemp"));
+const CategoryTemp = lazy(() => import("../containers/NotFound"));
 const AuthCallback = lazy(() => import('../containers/Authorize/Auth'));
 const UnAuthorize = lazy(() => import("../containers/UnAuthorization"));
 
@@ -70,6 +72,10 @@ const Routes = () => {
 
         <LayoutRoute path={BRAND}>
           <Brand />
+        </LayoutRoute>
+
+        <LayoutRoute exact path={CATEGORY}>
+          <Brand1 />
         </LayoutRoute>
 
         <Route path={UNAUTHORIZE}>

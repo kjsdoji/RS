@@ -131,6 +131,7 @@ namespace RS.BackendApi.Controllers
             {
                 Name = brandCreateRequest.Name,
                 Type = (int)brandCreateRequest.Type,
+                Description = brandCreateRequest.Description,
                 ImageName = string.Empty
             };
 
