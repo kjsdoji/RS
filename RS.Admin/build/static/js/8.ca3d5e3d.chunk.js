@@ -1,0 +1,2 @@
+(this["webpackJsonponline-asset-management"]=this["webpackJsonponline-asset-management"]||[]).push([[8],{131:function(e,t,n){"use strict";n.r(t);n(0);var a=n(3);t.default=function(){return Object(a.jsx)(a.Fragment,{children:Object(a.jsx)("div",{className:"primaryColor text-title intro-x",children:"My HomePage"})})}}}]);
+//# sourceMappingURL=8.ca3d5e3d.chunk.js.map

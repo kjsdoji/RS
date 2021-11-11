@@ -1,0 +1,2 @@
+(this["webpackJsonponline-asset-management"]=this["webpackJsonponline-asset-management"]||[]).push([[7],{133:function(n,e,t){"use strict";t.r(e);var c=t(0),a=t(12),s=t(22),i=t(3),u=Object(c.lazy)((function(){return t.e(0).then(t.bind(null,128))})),b=Object(c.lazy)((function(){return t.e(6).then(t.bind(null,129))}));e.default=function(){return Object(i.jsxs)(a.c,{children:[Object(i.jsx)(a.a,{exact:!0,path:s.b,children:Object(i.jsx)(b,{})}),Object(i.jsx)(a.a,{component:u})]})}}}]);
+//# sourceMappingURL=7.89f6d910.chunk.js.map
