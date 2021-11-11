@@ -3,14 +3,14 @@ import { SetStatusType } from "../../constants/status";
 
 import IError from "../../interfaces/IError";
 import IPagedModel from "../../interfaces/IPagedModel";
-import IQueryBrandModel from "../../interfaces/Brand/IQueryBrandModel";
-import IBrand from "../../interfaces/Brand/IBrand";
-import IBrandForm from "../../interfaces/Brand/IBrandForm";
+import IQueryCategoryModel from "../../interfaces/Category/IQueryCategoryModel";
+import ICategory from "../../interfaces/Category/ICategory";
+import ICategoryForm from "../../interfaces/Category/ICategoryForm";
 
-type BrandState = {
+type CategoryState = {
     loading: boolean;
-    brandResult?: IBrand;
-    brands: IPagedModel<IBrand> | null;
+    categoryResult?: ICategory;
+    categories: IPagedModel<ICategory> | null;
     status?: number;
     error?: IError;
     disable: boolean;
@@ -18,68 +18,68 @@ type BrandState = {
 
 export type CreateAction = {
     handleResult: Function,
-    formValues: IBrandForm,
+    formValues: ICategoryForm,
 }
 
 export type DisableAction = {
     handleResult: Function,
-    brandId: number,
+    categoryId: number,
 }
 
-const initialState: BrandState = {
-    brands: null,
+const initialState: CategoryState = {
+    categories: null,
     loading: false,
     disable: false,
 };
 
-const brandReducerSlice = createSlice({
+const categoryReducerSlice = createSlice({
     name: 'home',
     initialState,
     reducers: {
-        getBrands: (state, action: PayloadAction<IQueryBrandModel>): BrandState => {
+        getCategories: (state, action: PayloadAction<IQueryCategoryModel>): CategoryState => {
 
             return {
                 ...state,
                 loading: true,
             }
         },
-        setBrands: (state, action: PayloadAction<IPagedModel<IBrand>>): BrandState => {
-            const brands = action.payload;
+        setCategories: (state, action: PayloadAction<IPagedModel<ICategory>>): CategoryState => {
+            const categories = action.payload;
 
             return {
                 ...state,
-                brands,
+                categories,
                 loading: false,
             }
         },
-        createBrand: (state, action: PayloadAction<CreateAction>): BrandState => {
+        createCategory: (state, action: PayloadAction<CreateAction>): CategoryState => {
             return {
                 ...state,
                 loading: true,
             }
         },
-        updateBrand: (state, action: PayloadAction<CreateAction>): BrandState => {
+        updateCategory: (state, action: PayloadAction<CreateAction>): CategoryState => {
             return {
                 ...state,
                 loading: true,
             }
         },
-        disableBrand: (state, action: PayloadAction<DisableAction>): BrandState => {
+        disableCategory: (state, action: PayloadAction<DisableAction>): CategoryState => {
             return {
                 ...state,
                 loading: true,
             }
         },
-        setBrand: (state, action: PayloadAction<IBrand>): BrandState => {
-            const brandResult = action.payload;
+        setCategory: (state, action: PayloadAction<ICategory>): CategoryState => {
+            const categoryResult = action.payload;
 
             return {
                 ...state,
-                brandResult,
+                categoryResult,
                 loading: false,
             }
         },
-        setStatus: (state, action: PayloadAction<SetStatusType>): BrandState => {
+        setStatus: (state, action: PayloadAction<SetStatusType>): CategoryState => {
             const { status, error } = action.payload;
 
             return {
@@ -89,10 +89,10 @@ const brandReducerSlice = createSlice({
                 loading: false,
             }
         },
-        cleanUp: (state): BrandState => ({
+        cleanUp: (state): CategoryState => ({
             ...state,
             loading: false,
-            brandResult: undefined,
+            categoryResult: undefined,
             status: undefined,
             error: undefined,
         }),
@@ -100,7 +100,7 @@ const brandReducerSlice = createSlice({
 });
 
 export const {
-    createBrand, setBrand, setStatus, cleanUp,  getBrands, setBrands, updateBrand, disableBrand
-} = brandReducerSlice.actions;
+    createCategory, setCategory, setStatus, cleanUp,  getCategories, setCategories, updateCategory, disableCategory
+} = categoryReducerSlice.actions;
 
-export default brandReducerSlice.reducer;
+export default categoryReducerSlice.reducer;

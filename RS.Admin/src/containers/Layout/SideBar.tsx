@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {
   HOME,
-  BRAND
+  BRAND,
+  CATEGORY
 } from "src/constants/pages";
 import Roles from "src/constants/roles";
 import { useAppSelector } from "src/hooks/redux";
@@ -25,6 +26,17 @@ const SideBar = () => {
           <div className=''>
             <NavLink className="navItem intro-x" to={BRAND}>
               <button className="btnCustom">Manage Brand</button>
+            </NavLink>
+          </div>
+        )
+      }
+
+      {
+        // account?.profile.role === Roles.Admin && (
+        (
+          <div className=''>
+            <NavLink className="navItem intro-x" to={CATEGORY}>
+              <button className="btnCustom">Manage Category</button>
             </NavLink>
           </div>
         )

@@ -10,44 +10,40 @@ import CheckboxField from '../../components/FormInputs/CheckboxField';
 import SelectField from '../../components/FormInputs/SelectField';
 import { CATEGORY } from '../../constants/pages';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { createBrand, updateBrand } from './reducer';
-import IBrandForm from '../../interfaces/Brand/IBrandForm';
+import { createCategory, updateCategory } from './reducer';
+import ICategoryForm from '../../interfaces/Category/ICategoryForm';
 import {Status} from '../../constants/status';
 import { NormalBrandType } from "../../constants/Brand/BrandConstants";
 import { BrandTypeOptions } from "../../constants/selectOptions";
 import FileUpload from '../../components/FormInputs/FileUpload';
 
-const initialFormValues: IBrandForm = {
-    name: '',
-    type: NormalBrandType,
-    imageFile: undefined,
-    description: ''
+const initialFormValues: ICategoryForm = {
+    name: ''
 };
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Required'),
-    type: Yup.string().required('Required')
+    name: Yup.string().required('Required')
 });
 
 type Props = {
-    initialBrandForm?: IBrandForm;
+    initialCategoryForm?: ICategoryForm;
 };
 
-const BrandFormContainer: React.FC<Props> = ({ initialBrandForm = {
+const CategoryFormContainer: React.FC<Props> = ({ initialCategoryForm = {
     ...initialFormValues
 } }) => {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useAppDispatch();
 
-    const isUpdate = initialBrandForm.id ? true : false;
+    const isUpdate = initialCategoryForm.id ? true : false;
 
     const history = useHistory();
 
     const handleResult = (result: boolean, message: string) => {
         if (result) {
             NotificationManager.success(
-                `${isUpdate ? 'Updated' : 'Created'} Successful Brand ${message}`,
+                `${isUpdate ? 'Updated' : 'Created'} Successful Category ${message}`,
                 `${isUpdate ? 'Update' : 'Create'} Successful`,
                 2000,
             );
@@ -63,7 +59,7 @@ const BrandFormContainer: React.FC<Props> = ({ initialBrandForm = {
 
     return (
         <Formik
-            initialValues={initialBrandForm}
+            initialValues={initialCategoryForm}
             enableReinitialize
             validationSchema={validationSchema}
             onSubmit={(values) => {
@@ -71,10 +67,10 @@ const BrandFormContainer: React.FC<Props> = ({ initialBrandForm = {
 
                 setTimeout(() => {
                     if (isUpdate) {
-                        dispatch(updateBrand({ handleResult, formValues: values }));
+                        dispatch(updateCategory({ handleResult, formValues: values }));
                     }
                     else {
-                        dispatch(createBrand({ handleResult, formValues: values }));
+                        dispatch(createCategory({ handleResult, formValues: values }));
                     }
 
                     setLoading(false);
@@ -86,25 +82,11 @@ const BrandFormContainer: React.FC<Props> = ({ initialBrandForm = {
                     <TextField 
                         name="name" 
                         label="Name" 
-                        placeholder="input brand name" 
-                        isrequired 
+                        placeholder="input category name" 
                         disabled={isUpdate ? true : false} />
-                    <SelectField 
-                        name="type" 
-                        label="Type" 
-                        options={BrandTypeOptions} 
-                        isrequired />
-                    <TextField 
-                        name="description" 
-                        label="Description" 
-                        placeholder="input brand description" 
-                        isrequired 
-                        disabled={isUpdate ? true : false} />
-                    <FileUpload 
-                        name="imageFile" 
-                        label="Image" 
-                        image={actions.values.imagePath} />
-                    
+
+
+
                     <div className="d-flex">
                         <div className="ml-auto">
                             <button className="btn btn-danger"
@@ -124,4 +106,4 @@ const BrandFormContainer: React.FC<Props> = ({ initialBrandForm = {
     );
 }
 
-export default BrandFormContainer;
+export default CategoryFormContainer;

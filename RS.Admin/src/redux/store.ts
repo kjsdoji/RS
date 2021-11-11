@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import authReducer from 'src/containers/Authorize/reducer';
 import brandReducer from 'src/containers/Brand/reducer';
+import categoryReducer from 'src/containers/Category/reducer';
 
 import rootSaga from './sagas/rootSaga';
 import { createBrowserHistory } from 'history' 
@@ -10,7 +11,8 @@ import { connectRouter } from 'connected-react-router'
 
 const reducer = combineReducers({
     authReducer,
-    brandReducer
+    brandReducer,
+    categoryReducer
 });
 
 const history = createBrowserHistory()

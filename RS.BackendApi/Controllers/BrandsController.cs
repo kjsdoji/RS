@@ -23,13 +23,13 @@ namespace RS.BackendApi.Controllers
     [Route("api/[controller]")]
     [EnableCors("AllowOrigins")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class BrandController : ControllerBase
     {
         private readonly RSDbContext _context;
         private readonly IMapper _mapper;
         private readonly IFileStorageService _fileStorageService;
 
-        public BrandsController(
+        public BrandController(
             RSDbContext context,
             IFileStorageService fileStorageService,
             IMapper mapper)

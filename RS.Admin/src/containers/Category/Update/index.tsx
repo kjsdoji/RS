@@ -3,42 +3,38 @@ import { Redirect, useParams } from 'react-router';
 
 import { NOTFOUND } from '../../../constants/pages';
 import { useAppSelector } from '../../../hooks/redux';
-import IBrandForm from '../../../interfaces/Brand/IBrandForm';
-import BrandForm from '../BrandForm';
+import ICategoryForm from '../../../interfaces/Category/ICategoryForm';
+import CategoryForm from '../CategoryForm';
 
-const UpdateBrandContainer = () => {
-  const { brands } = useAppSelector(state => state.brandReducer);
+const UpdateCategoryContainer = () => {
+  const { categories } = useAppSelector(state => state.categoryReducer);
   
-  const [brand, setBrand] = useState(undefined as IBrandForm | undefined);
+  const [category, setCategory] = useState(undefined as ICategoryForm | undefined);
 
   const { id } = useParams<{ id: string }>();
   
-  const existBrand = brands?.items.find(item => item.id === Number(id));
+  const existCategory = categories?.items.find(item => item.id === Number(id));
 
   useEffect(() => {
 
-    if (existBrand) {
-      setBrand({
-        id: existBrand.id,
-        name: existBrand.name,
-        type: existBrand.type,
-        description: existBrand.description,
-        imagePath: existBrand.imagePath,
-        imageFile: existBrand.imageFile
+    if (existCategory) {
+      setCategory({
+        id: existCategory.id,
+        name: existCategory.name
       });
     }
-  }, [existBrand]);
+  }, [existCategory]);
 
   return (
     <div className='ml-5'>
       <div className='primaryColor text-title intro-x'>
-        Update Brand {existBrand?.name}
+        Update Category {existCategory?.name}
       </div>
 
       <div className='row'>
         {
-          brand && (<BrandForm
-            initialBrandForm={brand}
+          category && (<CategoryForm
+            initialCategoryForm={category}
   
           />)
         }
@@ -47,4 +43,4 @@ const UpdateBrandContainer = () => {
   )
 };
 
-export default UpdateBrandContainer;
+export default UpdateCategoryContainer;

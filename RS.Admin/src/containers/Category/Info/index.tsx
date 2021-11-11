@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, } from "react-bootstrap";
 
-import IBrand from "../../../interfaces/Brand/IBrand";
+import ICategory from "../../../interfaces/Category/ICategory";
 import formatDateTime from "../../../utils/formatDateTime";
 import { 
   NormalBrandType,
@@ -11,15 +11,11 @@ import {
 } from "../../../constants/Brand/BrandConstants";
 
 type Props = {
-  brand: IBrand;
+  category: ICategory;
   handleClose: () => void;
 };
 
-const Info: React.FC<Props> = ({ brand, handleClose }) => {
-  const getBrandTypeName = (id: number) => {
-    return id == LuxuryBrandType ? LuxyryBrandTypeLabel : NormalBrandTypeLabel;
-  }
-
+const Info: React.FC<Props> = ({ category, handleClose }) => {
   return (
     <>
       <Modal
@@ -29,7 +25,7 @@ const Info: React.FC<Props> = ({ brand, handleClose }) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="login-modal">
-            Detailed Brand Infomation
+            Detailed Category Infomation
           </Modal.Title>
         </Modal.Header>
 
@@ -37,24 +33,12 @@ const Info: React.FC<Props> = ({ brand, handleClose }) => {
           <div>
             <div className='row -intro-y'>
               <div className='col-4'>Id:</div>
-              <div>{brand.id}</div>
+              <div>{category.id}</div>
             </div>
 
             <div className='row -intro-y'>
               <div className='col-4'>Name:</div>
-              <div>{brand.name}</div>
-            </div>
-
-            <div className='row -intro-y'>
-              <div className='col-4'>Type:</div>
-              <div>{getBrandTypeName(brand.type)}</div>
-            </div>
-
-            <div className='row -intro-y'>
-              <div className='col-4'>Image:</div>
-              <div>
-                <img src={brand.imagePath} className='object-center w-full rounded-md' />
-              </div>
+              <div>{category.name}</div>
             </div>
 
           </div>

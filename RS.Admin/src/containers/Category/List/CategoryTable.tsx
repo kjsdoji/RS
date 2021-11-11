@@ -8,10 +8,10 @@ import { NotificationManager } from 'react-notifications';
 import Table, { SortType } from "../../../components/Table";
 import IColumnOption from "../../../interfaces/IColumnOption";
 import IPagedModel from "../../../interfaces/IPagedModel";
-import IBrand from "../../../interfaces/Brand/IBrand";
+import ICategory from "../../../interfaces/Category/ICategory";
 import formatDateTime from "../../../utils/formatDateTime";
 import Info from "../Info";
-import { EDIT_BRAND_ID } from "../../../constants/pages";
+import { EDIT_CATEGORY_ID } from "../../../constants/pages";
 import ConfirmModal from "../../../components/ConfirmModal";
 import { useAppDispatch } from "../../../hooks/redux";
 import { 
@@ -20,25 +20,23 @@ import {
   LuxuryBrandType, 
   LuxyryBrandTypeLabel 
 } from "../../../constants/Brand/BrandConstants";
-import { disableBrand } from "../reducer";
+import { disableCategory } from "../reducer";
 
 const columns: IColumnOption[] = [
   { columnName: "id", columnValue: "Id" },
-  { columnName: "name", columnValue: "Name" },
-  { columnName: "type", columnValue: "Type" },
-  { columnName: "description", columnValue: "Description" }
+  { columnName: "name", columnValue: "Name" }
 ];
 
 type Props = {
-  brands: IPagedModel<IBrand> | null;
+  categories: IPagedModel<ICategory> | null;
   handlePage: (page: number) => void;
   handleSort: (colValue: string) => void;
   sortState: SortType;
   fetchData: Function;
 };
 
-const BrandTable: React.FC<Props> = ({
-  brands,
+const CategoryTable: React.FC<Props> = ({
+  categories,
   handlePage,
   handleSort,
   sortState,
@@ -47,7 +45,7 @@ const BrandTable: React.FC<Props> = ({
   const dispatch = useAppDispatch();
 
   const [showDetail, setShowDetail] = useState(false);
-  const [brandDetail, setBrandDetail] = useState(null as IBrand | null);
+  const [categoryDetail, setCategoryDetail] = useState(null as ICategory | null);
   const [disableState, setDisable] = useState({
     isOpen: false,
     id: 0,
@@ -57,10 +55,10 @@ const BrandTable: React.FC<Props> = ({
   });
 
   const handleShowInfo = (id: number) => {
-    const brand = brands?.items.find((item) => item.id === id);
+    const category = categories?.items.find((item) => item.id === id);
 
-    if (brand) {
-      setBrandDetail(brand);
+    if (category) {
+      setCategoryDetail(category);
       setShowDetail(true);
     }
   };
@@ -74,7 +72,7 @@ const BrandTable: React.FC<Props> = ({
       id,
       isOpen: true,
       title: 'Are you sure',
-      message: 'Do you want to disable this Brand?',
+      message: 'Do you want to disable this category?',
       isDisable: true,
     });
   };
@@ -94,14 +92,14 @@ const BrandTable: React.FC<Props> = ({
       handleCloseDisable();
       fetchData();
       NotificationManager.success(
-        `Remove Brand Successful`,
+        `Remove Category Successful`,
         `Remove Successful`,
         2000,
     );
     } else {
       setDisable({
         ...disableState,
-        title: 'Can not disable Brand',
+        title: 'Can not disable category',
         message,
         isDisable: result
       });
@@ -109,9 +107,9 @@ const BrandTable: React.FC<Props> = ({
   };
     
   const handleConfirmDisable = () => {
-    dispatch(disableBrand({
+    dispatch(disableCategory({
       handleResult,
-      brandId: disableState.id,
+      categoryId: disableState.id,
     }));
   };
 
@@ -120,9 +118,8 @@ const BrandTable: React.FC<Props> = ({
   };
 
   const history = useHistory();
-  console.log(history);
   const handleEdit = (id: number) => {
-    history.push(EDIT_BRAND_ID(id));
+    history.push(EDIT_CATEGORY_ID(id));
   };
 
   return (
@@ -132,17 +129,15 @@ const BrandTable: React.FC<Props> = ({
         handleSort={handleSort}
         sortState={sortState}
         page={{
-          currentPage: brands?.currentPage,
-          totalPage: brands?.totalPages,
+          currentPage: categories?.currentPage,
+          totalPage: categories?.totalPages,
           handleChange: handlePage,
         }}
       >
-        {brands?.items.map((data, index) => (
+        {categories?.items.map((data, index) => (
           <tr key={index} className="" onClick={() => handleShowInfo(data.id)}>
             <td>{data.id}</td>
             <td>{data.name}</td>
-            <td>{getBrandTypeName(data.type)}</td>
-            <td>{data.description}</td>
 
             <td className="d-flex">
               <ButtonIcon onClick={() => handleEdit(data.id)}>
@@ -155,8 +150,8 @@ const BrandTable: React.FC<Props> = ({
           </tr>
         ))}
       </Table>
-      {brandDetail && showDetail && (
-        <Info brand={brandDetail} handleClose={handleCloseDetail} />
+      {categoryDetail && showDetail && (
+        <Info category={categoryDetail} handleClose={handleCloseDetail} />
       )}
       <ConfirmModal
         title={disableState.title}
@@ -164,7 +159,6 @@ const BrandTable: React.FC<Props> = ({
         onHide={handleCloseDisable}
       >
         <div>
-
           <div className="text-center">
             {disableState.message}
           </div>
@@ -195,4 +189,4 @@ const BrandTable: React.FC<Props> = ({
   );
 };
 
-export default BrandTable;
+export default CategoryTable;

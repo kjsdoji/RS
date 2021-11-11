@@ -5,10 +5,10 @@ import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import IBrandUserModel from "../../../interfaces/Brand/IQueryBrandModel";
-import { getBrands } from "../reducer";
+import { getCategories } from "../reducer";
 import { Link } from "react-router-dom";
-import BrandTable from "./BrandTable";
-import IQueryBrandModel from "../../../interfaces/Brand/IQueryBrandModel";
+import CategoryTable from "./CategoryTable";
+import IQueryCategoryModel from "../../../interfaces/Category/IQueryCategoryModel";
 import ISelectOption from "../../../interfaces/ISelectOption";
 import { FilterBrandTypeOptions } from "../../../constants/selectOptions";
 import { 
@@ -18,16 +18,16 @@ import {
   DEFAULT_PAGE_LIMIT
 } from "../../../constants/paging"
 
-const ListBrand = () => {
+const ListCategory = () => {
   const dispatch = useAppDispatch();
-  const { brands, loading } = useAppSelector((state) => state.brandReducer);
+  const { categories, loading } = useAppSelector((state) => state.categoryReducer);
 
   const [query, setQuery] = useState({
-    page: brands?.currentPage ?? 1,
+    page: categories?.currentPage ?? 1,
     limit: DEFAULT_PAGE_LIMIT,
     sortOrder: DECSENDING,
     sortColumn: DEFAULT_BRAND_SORT_COLUMN_NAME
-  } as IQueryBrandModel);
+  } as IQueryCategoryModel);
 
   const [search, setSearch] = useState("");
 
@@ -102,7 +102,7 @@ const ListBrand = () => {
   };
 
   const fetchData = () => {
-    dispatch(getBrands(query));
+    dispatch(getCategories(query));
   }
 
   useEffect(() => {
@@ -111,22 +111,11 @@ const ListBrand = () => {
 
   return (
     <>
-      <div className="primaryColor text-title intro-x">Brand List</div>
+      <div className="primaryColor text-title intro-x">Category List</div>
 
       <div>
         <div className="d-flex mb-5 intro-x">
           <div className="d-flex align-items-center w-md mr-5">
-          <ReactMultiSelectCheckboxes
-              options={FilterBrandTypeOptions}
-              hideSearch={true}
-              placeholderButtonLabel="Type"
-              value={selectedType}
-              onChange={handleType}
-            />
-
-            <div className="border p-2">
-              <FunnelFill />
-            </div>
           </div>
 
           <div className="d-flex align-items-center w-ld ml-auto">
@@ -144,14 +133,14 @@ const ListBrand = () => {
           </div>
 
           <div className="d-flex align-items-center ml-3">
-            <Link to="/brand/create" type="button" className="btn btn-danger">
-              Create new Brand
+            <Link to="/category/create" type="button" className="btn btn-danger">
+              Create New Category 
             </Link>
           </div>
         </div>
 
-        <BrandTable
-          brands={brands}
+        <CategoryTable
+          categories={categories}
           handlePage={handlePage}
           handleSort={handleSort}
           sortState={{
@@ -165,4 +154,4 @@ const ListBrand = () => {
   );
 };
 
-export default ListBrand;
+export default ListCategory;

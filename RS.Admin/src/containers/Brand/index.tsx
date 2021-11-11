@@ -1,7 +1,9 @@
 import React, { lazy } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import history from './history';
+import { BrowserRouter } from "react-router-dom";
 
-import { CREATE_BRAND, BRAND, EDIT_BRAND } from 'src/constants/pages';
+import { CREATE_BRAND, BRAND, EDIT_BRAND, EDIT_BRAND_ID } from 'src/constants/pages';
 import LayoutRoute from 'src/routes/LayoutRoute';
 
 const NotFound = lazy(() => import("../NotFound"));

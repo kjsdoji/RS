@@ -11,9 +11,16 @@ import BrandTable from "./BrandTable";
 import IQueryBrandModel from "src/interfaces/Brand/IQueryBrandModel";
 import ISelectOption from "src/interfaces/ISelectOption";
 import { FilterBrandTypeOptions } from "src/constants/selectOptions";
-import { 
-  ACCSENDING, 
-  DECSENDING, 
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import {
+  ACCSENDING,
+  DECSENDING,
   DEFAULT_BRAND_SORT_COLUMN_NAME,
   DEFAULT_PAGE_LIMIT
 } from "src/constants/paging"
@@ -110,13 +117,13 @@ const ListBrand = () => {
   }, [query]);
 
   return (
-    <>
+    <Router>
       <div className="primaryColor text-title intro-x">Brand List</div>
 
       <div>
         <div className="d-flex mb-5 intro-x">
           <div className="d-flex align-items-center w-md mr-5">
-          <ReactMultiSelectCheckboxes
+            <ReactMultiSelectCheckboxes
               options={FilterBrandTypeOptions}
               hideSearch={true}
               placeholderButtonLabel="Type"
@@ -145,7 +152,7 @@ const ListBrand = () => {
 
           <div className="d-flex align-items-center ml-3">
             <Link to="/brand/create" type="button" className="btn btn-danger">
-              Create new Brand
+              Create New Brand
             </Link>
           </div>
         </div>
@@ -161,7 +168,7 @@ const ListBrand = () => {
           fetchData={fetchData}
         />
       </div>
-    </>
+    </Router>
   );
 };
 

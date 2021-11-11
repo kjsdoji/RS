@@ -3,37 +3,37 @@ import qs from 'qs';
 
 import RequestService from '../../../services/request';
 import EndPoints from '../../../constants/endpoints';
-import IBrandForm from "../../../interfaces/Brand/IBrandForm";
-import IBrand from "../../../interfaces/Brand/IBrand";
-import IQueryBrandModel from "../../../interfaces/Brand/IQueryBrandModel";
+import ICategoryForm from "../../../interfaces/Category/ICategoryForm";
+import ICategory from "../../../interfaces/Category/ICategory";
+import IQueryCategoryModel from "../../../interfaces/Category/IQueryCategoryModel";
 
-export function createBrandRequest(brandForm: IBrandForm): Promise<AxiosResponse<IBrand>> {
+export function createCategoryRequest(categoryForm: ICategoryForm): Promise<AxiosResponse<ICategory>> {
     const formData = new FormData();
 
-    Object.keys(brandForm).forEach(key => {
-        formData.append(key, brandForm[key]);
+    Object.keys(categoryForm).forEach(key => {
+        formData.append(key, categoryForm[key]);
     });
 
-    return RequestService.axios.post(EndPoints.brand, formData);
+    return RequestService.axios.post(EndPoints.category, formData);
 }
 
-export function getBrandsRequest(query: IQueryBrandModel): Promise<AxiosResponse<IBrand>> {
-    return RequestService.axios.get(EndPoints.brand, {
+export function getCategoriesRequest(query: IQueryCategoryModel): Promise<AxiosResponse<ICategory>> {
+    return RequestService.axios.get(EndPoints.category, {
         params: query,
         paramsSerializer: params => qs.stringify(params),
     });
 }
 
-export function UpdateBrandRequest(brandForm: IBrandForm): Promise<AxiosResponse<IBrand>> {
+export function UpdateCategoryRequest(categoryForm: ICategoryForm): Promise<AxiosResponse<ICategory>> {
     const formData = new FormData();
 
-    Object.keys(brandForm).forEach(key => {
-        formData.append(key, brandForm[key]);
+    Object.keys(categoryForm).forEach(key => {
+        formData.append(key, categoryForm[key]);
     });
 
-    return RequestService.axios.put(EndPoints.brandId(brandForm.id ?? - 1), formData);
+    return RequestService.axios.put(EndPoints.categoryId(categoryForm.id ?? - 1), formData);
 }
 
-export function DisableBrandRequest(brandId: number): Promise<AxiosResponse<Boolean>> {
-    return RequestService.axios.delete(EndPoints.brandId(brandId));
+export function DisableCategoryRequest(categoryId: number): Promise<AxiosResponse<Boolean>> {
+    return RequestService.axios.delete(EndPoints.categoryId(categoryId));
 }

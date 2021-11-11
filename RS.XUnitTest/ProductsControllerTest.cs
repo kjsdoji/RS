@@ -13,10 +13,10 @@ namespace RS.XUnitTest
     public class ProductsControllerTest
     {
         [Fact]
-        public void ProductsController_GetById()
+        public void ProductsController_GetById_ReturnProduct()
         {
             //Arrange
-            var mockProductVm = new ProductVm()
+            var mockProductVm1 = new ProductVm()
             {
                 Id = 1,
                 Price = 200000,
@@ -39,18 +39,34 @@ namespace RS.XUnitTest
                 }
             };
 
-            var mockProductService = new MockProductService().MockById(mockProductVm, 1, "en");
+            var mockProductService1 = new MockProductService().MockById(mockProductVm1, 1, "en");
 
-            var controller = new ProductsController(mockProductService.Object);
+            var controller1 = new ProductsController(mockProductService1.Object);
 
             //Act
-
-            var result = controller.GetById(1, "en");
+            var result1 = controller1.GetById(1, "en");
 
             //Assert
+            Assert.IsAssignableFrom<IActionResult>(result1);
+            mockProductService1.VerifyGetById(Times.Once(), 1, "en");
+        }
 
-            Assert.IsAssignableFrom<IActionResult>(result);
-            mockProductService.VerifyGetById(Times.Once(), 2, "en");
+        [Fact]
+        public void ProductsController_GetById_ReturnNull()
+        {
+            //Arrange
+            ProductVm mockProductVm2 = null;
+
+            var mockProductService2 = new MockProductService().MockById(mockProductVm2, 1, "en");
+
+            var controller2 = new ProductsController(mockProductService2.Object);
+
+            //Act
+            var result2 = controller2.GetById(1, "en");
+
+            //Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result2);
+            Assert.Equal("Cannot find product", badRequestResult.Value);
         }
     }
 }

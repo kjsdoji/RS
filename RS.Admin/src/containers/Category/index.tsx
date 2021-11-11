@@ -1,27 +1,27 @@
 import React, { lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { CREATE_BRAND, CATEGORY, EDIT_BRAND } from '../../constants/pages';
+import { CREATE_CATEGORY, CATEGORY, EDIT_CATEGORY } from '../../constants/pages';
 import LayoutRoute from '../../routes/LayoutRoute';
 
 const NotFound = lazy(() => import("../NotFound"));
-const CreateBrand = lazy(() => import("./Create"));
-const ListBrand = lazy(() => import("./List"));
-const UpdateBrand = lazy(() => import("./Update"))
+const CreateCategory = lazy(() => import("./Create"));
+const ListCategory = lazy(() => import("./List"));
+const UpdateCategory = lazy(() => import("./Update"))
 
-const Brand1 = () => {
+const Category = () => {
     return (
         <Switch>
             <Route exact path={CATEGORY}>
-                <ListBrand />
+                <ListCategory />
             </Route>
 
-            <Route exact path={CREATE_BRAND}>
-                <CreateBrand />
+            <Route exact path={CREATE_CATEGORY}>
+                <CreateCategory />
             </Route>
 
-            <Route exact path={EDIT_BRAND}>
-                <UpdateBrand />
+            <Route exact path={EDIT_CATEGORY}>
+                <UpdateCategory />
             </Route>
 
             <Route component={NotFound} />
@@ -29,4 +29,4 @@ const Brand1 = () => {
     )
 };
 
-export default Brand1;
+export default Category;

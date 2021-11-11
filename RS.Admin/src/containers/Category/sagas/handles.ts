@@ -3,26 +3,26 @@ import { call, put } from "redux-saga/effects";
 import { Status } from "../../../constants/status";
 
 import IError from "../../../interfaces/IError";
-import IQueryBrandModel from "../../../interfaces/Brand/IQueryBrandModel";
-import { setBrand, disableBrand, CreateAction, setBrands, setStatus, DisableAction } from "../reducer";
+import IQueryCategoryModel from "../../../interfaces/Category/IQueryCategoryModel";
+import { setCategory, disableCategory, CreateAction, setCategories, setStatus, DisableAction } from "../reducer";
 
-import { createBrandRequest, DisableBrandRequest, getBrandsRequest, UpdateBrandRequest } from './requests';
-import IBrand from "../../../interfaces/Brand/IBrand";
+import { createCategoryRequest, DisableCategoryRequest, getCategoriesRequest, UpdateCategoryRequest } from './requests';
+import ICategory from "../../../interfaces/Category/ICategory";
 
-export function* handleCreateBrand(action: PayloadAction<CreateAction>) {
+export function* handleCreateCategory(action: PayloadAction<CreateAction>) {
     const {handleResult, formValues} = action.payload;
     try {
-        console.log('handleCreateBrand');
+        console.log('handleCreateCategory');
         console.log(formValues);
         
-        const { data } = yield call(createBrandRequest, formValues);
+        const { data } = yield call(createCategoryRequest, formValues);
 
         if (data)
         {
             handleResult(true, data.name);
         }
 
-        yield put(setBrand(data));
+        yield put(setCategory(data));
         
     } catch (error) {
         const errorModel = error.response.data as IError;
@@ -31,15 +31,15 @@ export function* handleCreateBrand(action: PayloadAction<CreateAction>) {
     }
 }
 
-export function* handleGetBrands(action: PayloadAction<IQueryBrandModel>) {
+export function* handleGetCategories(action: PayloadAction<IQueryCategoryModel>) {
     const query = action.payload;
     try {
-        console.log('handleGetBrands');
+        console.log('handleGetCategories');
         console.log(query);
-        const { data } = yield call(getBrandsRequest, query);
+        const { data } = yield call(getCategoriesRequest, query);
         
         console.log(data);
-        yield put(setBrands(data));
+        yield put(setCategories(data));
 
     } catch (error) {
         const errorModel = error.response.data as IError;
@@ -52,15 +52,15 @@ export function* handleGetBrands(action: PayloadAction<IQueryBrandModel>) {
     }
 }
 
-export function* handleUpdateBrand(action : PayloadAction<CreateAction>){
+export function* handleUpdateCategory(action : PayloadAction<CreateAction>){
     const { handleResult, formValues } = action.payload; 
 
     try {
-        const { data } = yield call(UpdateBrandRequest, formValues);
+        const { data } = yield call(UpdateCategoryRequest, formValues);
 
         handleResult(true, data.name.toString());
         
-        yield put(setBrand(data));
+        yield put(setCategory(data));
 
     }catch (error) {
 
@@ -70,11 +70,11 @@ export function* handleUpdateBrand(action : PayloadAction<CreateAction>){
     }
 }
 
-export function* handleDisableBrand(action: PayloadAction<DisableAction>) {
-    const { handleResult, brandId } = action.payload;
+export function* handleDisableCategory(action: PayloadAction<DisableAction>) {
+    const { handleResult, categoryId } = action.payload;
 
     try {
-        const {data} = yield call(DisableBrandRequest, brandId);
+        const {data} = yield call(DisableCategoryRequest, categoryId);
 
         handleResult(data, '');
 

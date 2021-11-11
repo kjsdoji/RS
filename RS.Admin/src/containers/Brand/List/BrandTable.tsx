@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PencilFill, XCircle } from "react-bootstrap-icons";
 import { useHistory } from "react-router";
+
 import ButtonIcon from "src/components/ButtonIcon";
 import { NotificationManager } from 'react-notifications';
 
@@ -13,13 +14,20 @@ import Info from "../Info";
 import { EDIT_BRAND_ID } from "src/constants/pages";
 import ConfirmModal from "src/components/ConfirmModal";
 import { useAppDispatch } from "src/hooks/redux";
-import { 
+import {
   NormalBrandType,
   NormalBrandTypeLabel,
-  LuxuryBrandType, 
-  LuxyryBrandTypeLabel 
+  LuxuryBrandType,
+  LuxyryBrandTypeLabel
 } from "src/constants/Brand/BrandConstants";
 import { disableBrand } from "../reducer";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const columns: IColumnOption[] = [
   { columnName: "id", columnValue: "Id" },
@@ -96,7 +104,7 @@ const BrandTable: React.FC<Props> = ({
         `Remove Brand Successful`,
         `Remove Successful`,
         2000,
-    );
+      );
     } else {
       setDisable({
         ...disableState,
@@ -106,7 +114,7 @@ const BrandTable: React.FC<Props> = ({
       });
     }
   };
-    
+
   const handleConfirmDisable = () => {
     dispatch(disableBrand({
       handleResult,
@@ -120,11 +128,12 @@ const BrandTable: React.FC<Props> = ({
 
   const history = useHistory();
   const handleEdit = (id: number) => {
+    console.log('aaaaaaaaaaa  ', history);
     history.push(EDIT_BRAND_ID(id));
   };
 
   return (
-    <>
+    <Router>
       <Table
         columns={columns}
         handleSort={handleSort}
@@ -162,7 +171,6 @@ const BrandTable: React.FC<Props> = ({
         onHide={handleCloseDisable}
       >
         <div>
-
           <div className="text-center">
             {disableState.message}
           </div>
@@ -175,7 +183,7 @@ const BrandTable: React.FC<Props> = ({
                   type="button"
                 >
                   Disable
-            </button>
+                </button>
 
                 <button
                   className="btn btn-outline-secondary"
@@ -183,13 +191,13 @@ const BrandTable: React.FC<Props> = ({
                   type="button"
                 >
                   Cancel
-            </button>
+                </button>
               </div>
             )
           }
         </div>
       </ConfirmModal>
-    </>
+    </Router>
   );
 };
 

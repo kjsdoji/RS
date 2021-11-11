@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
-import BrandFormContainer from "../BrandForm";
+import CategoryFormContainer from "../CategoryForm";
 
-const CreateBrandContainer = () => {
+const CreateCategoryContainer = () => {
 
   return (
     <div className='ml-5'>
       <div className='primaryColor text-title intro-x'>
-        Create New Brand
+        Create New Category
       </div>
 
       <div className='row'>
-        <BrandFormContainer />
+        <CategoryFormContainer />
 
       </div>
 
@@ -19,4 +19,4 @@ const CreateBrandContainer = () => {
   );
 };
 
-export default CreateBrandContainer;
+export default CreateCategoryContainer;

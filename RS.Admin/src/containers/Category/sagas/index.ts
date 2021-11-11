@@ -1,11 +1,11 @@
 import { takeLatest } from 'redux-saga/effects';
 
-import { createBrand, getBrands, updateBrand, disableBrand } from '../reducer';
-import { handleCreateBrand, handleGetBrands, handleUpdateBrand, handleDisableBrand } from './handles';
+import { createCategory, getCategories, updateCategory, disableCategory } from '../reducer';
+import { handleCreateCategory, handleGetCategories, handleUpdateCategory, handleDisableCategory } from './handles';
 
-export default function* BrandSagas() {
-    yield takeLatest(createBrand.type, handleCreateBrand);
-    yield takeLatest(getBrands.type, handleGetBrands);
-    yield takeLatest(updateBrand.type, handleUpdateBrand);
-    yield takeLatest(disableBrand.type, handleDisableBrand);
+export default function* CategorySagas() {
+    yield takeLatest(createCategory.type, handleCreateCategory);
+    yield takeLatest(getCategories.type, handleGetCategories);
+    yield takeLatest(updateCategory.type, handleUpdateCategory);
+    yield takeLatest(disableCategory.type, handleDisableCategory);
 }

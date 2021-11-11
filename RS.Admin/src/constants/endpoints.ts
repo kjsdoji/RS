@@ -2,8 +2,10 @@ const Endpoints = {
     authorize: 'api/authorize',
     me: 'api/authorize/me',
     
-    brand: 'api/brands',
-    brandId: (id: number | string): string => `api/brands/${id}`,
+    brand: 'api/brand',
+    brandId: (id: number | string): string => `api/brand/${id}`,
+    category: 'api/category',
+    categoryId: (id: number | string): string => `api/category/${id}`,
 
 };
 
