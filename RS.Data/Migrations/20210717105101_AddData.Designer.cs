@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RS.Data.EF;
 
 namespace RS.Data.Migrations
 {
     [DbContext(typeof(RSDbContext))]
-    partial class RSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210717105101_AddData")]
+    partial class AddData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,7 +187,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "accb2ee3-0fed-49f9-88fe-78c3d28b82ba",
+                            ConcurrencyStamp = "98cf7da6-9176-490e-8821-d2b302b98bc6",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -193,7 +195,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"),
-                            ConcurrencyStamp = "6858ace8-d178-44f1-ad89-2de9be5cc075",
+                            ConcurrencyStamp = "98eefb2a-fade-4ed8-86f7-633571640a8e",
                             Description = "User role",
                             Name = "user",
                             NormalizedName = "user"
@@ -270,7 +272,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a2142230-5c28-47ae-8cb3-1b026bbc14db",
+                            ConcurrencyStamp = "e4791daa-e68c-49f1-8c25-f561d23e2407",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -279,7 +281,7 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHSlxXEd9bU+opWvJrWWiMhTy/vXlX5fclW4GRe5PZIj1JG93wIleBZCmw9HKqQHpw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENIwlbwOyzsOzE+hijxx2IflQKoqOsVql4POcDhlU19OtSgVeWuZmien0xYqUO0mJg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -289,7 +291,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "358ae13e-db05-4b94-a07d-4f867df8cac4",
+                            ConcurrencyStamp = "0b8f9d67-dc61-4a86-bc99-698edb990a03",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -298,93 +300,11 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user",
-                            PasswordHash = "AQAAAAEAACcQAAAAEINub359dRcFAHcNOnuYGgfGg4DhsQKku9g0fZMsG1N8Mn7Dc1iIedt1wx38c+h6sg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOnogdQ0SpPR/UNWun8Ih6CwLTOS00HoS22kL3K6uesrayMIX4dnOgEH5if6XlveuQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "user"
-                        });
-                });
-
-            modelBuilder.Entity("RS.Data.Entities.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Description",
-                            IsDeleted = false,
-                            Name = "Test Brand 1",
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Description",
-                            IsDeleted = false,
-                            Name = "Test Brand 2",
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Description",
-                            IsDeleted = false,
-                            Name = "Test Brand 3",
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Description",
-                            IsDeleted = false,
-                            Name = "Test Brand 4",
-                            Type = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Description",
-                            IsDeleted = false,
-                            Name = "Test Brand 5",
-                            Type = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "Description",
-                            IsDeleted = false,
-                            Name = "Test Brand 6",
-                            Type = 2
                         });
                 });
 
@@ -430,16 +350,16 @@ namespace RS.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool?>("IsShowOnHome")
+                    b.Property<bool>("IsShowOnHome")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SortOrder")
+                    b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Status")
+                    b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
@@ -478,15 +398,18 @@ namespace RS.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LanguageId")
+                        .IsRequired()
                         .HasMaxLength(5)
                         .IsUnicode(false)
                         .HasColumnType("varchar(5)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("SeoAlias")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -725,7 +648,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 11, 5, 10, 44, 29, 20, DateTimeKind.Local).AddTicks(1539),
+                            DateCreated = new DateTime(2021, 7, 17, 17, 50, 59, 945, DateTimeKind.Local).AddTicks(1307),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -1116,7 +1039,9 @@ namespace RS.Data.Migrations
 
                     b.HasOne("RS.Data.Entities.Language", "Language")
                         .WithMany("CategoryTranslations")
-                        .HasForeignKey("LanguageId");
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 

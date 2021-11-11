@@ -10,8 +10,8 @@ using RS.Data.EF;
 namespace RS.Data.Migrations
 {
     [DbContext(typeof(RSDbContext))]
-    [Migration("20211111023542_init")]
-    partial class init
+    [Migration("20211105034429_ResetDataFeed")]
+    partial class ResetDataFeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -187,7 +187,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "ec6a4041-2d84-45bd-ae85-5c3e0e13ea19",
+                            ConcurrencyStamp = "accb2ee3-0fed-49f9-88fe-78c3d28b82ba",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -195,7 +195,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"),
-                            ConcurrencyStamp = "eef4d833-2fda-4bd2-b5ff-d30fa74ab507",
+                            ConcurrencyStamp = "6858ace8-d178-44f1-ad89-2de9be5cc075",
                             Description = "User role",
                             Name = "user",
                             NormalizedName = "user"
@@ -272,7 +272,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be728df4-491a-45b0-96e8-bbaef0a765c3",
+                            ConcurrencyStamp = "a2142230-5c28-47ae-8cb3-1b026bbc14db",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -281,7 +281,7 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAELMixqqFmrtPDoKpxSleGCmFgfYy43hg3FebT86NRfbmN7UgrkdwMDpQp8NTJlS4+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHSlxXEd9bU+opWvJrWWiMhTy/vXlX5fclW4GRe5PZIj1JG93wIleBZCmw9HKqQHpw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -291,7 +291,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8ffdc7ba-e84f-44dc-ba10-ec9e2fa17933",
+                            ConcurrencyStamp = "358ae13e-db05-4b94-a07d-4f867df8cac4",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -300,7 +300,7 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user",
-                            PasswordHash = "AQAAAAEAACcQAAAAECtSsnT4JzpRXq4ElC/0IF2ku+fNs3PrghZII1zas6bKBHqMEUp5uWovcAxw2U3Fzw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEINub359dRcFAHcNOnuYGgfGg4DhsQKku9g0fZMsG1N8Mn7Dc1iIedt1wx38c+h6sg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -727,7 +727,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 11, 11, 9, 35, 41, 832, DateTimeKind.Local).AddTicks(397),
+                            DateCreated = new DateTime(2021, 11, 5, 10, 44, 29, 20, DateTimeKind.Local).AddTicks(1539),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,

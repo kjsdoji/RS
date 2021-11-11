@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RS.Data.EF;
 
 namespace RS.Data.Migrations
 {
     [DbContext(typeof(RSDbContext))]
-    partial class RSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211104004203_AddPropertyForBrand")]
+    partial class AddPropertyForBrand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,7 +187,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "accb2ee3-0fed-49f9-88fe-78c3d28b82ba",
+                            ConcurrencyStamp = "8bd62870-b628-4d77-ab8f-74564d774072",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -193,7 +195,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"),
-                            ConcurrencyStamp = "6858ace8-d178-44f1-ad89-2de9be5cc075",
+                            ConcurrencyStamp = "d1c6170c-8fda-4fe3-8d4d-9d90a96822bb",
                             Description = "User role",
                             Name = "user",
                             NormalizedName = "user"
@@ -270,7 +272,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a2142230-5c28-47ae-8cb3-1b026bbc14db",
+                            ConcurrencyStamp = "88e7abbe-a297-4e2b-aded-f3dd8c013108",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -279,7 +281,7 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHSlxXEd9bU+opWvJrWWiMhTy/vXlX5fclW4GRe5PZIj1JG93wIleBZCmw9HKqQHpw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHU6wK8Ccds3UuiHZnHs25elz/O7YjiskTfT92zFuxpZ8yl8txv9qMmWacu0c3PoqQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -289,7 +291,7 @@ namespace RS.Data.Migrations
                         {
                             Id = new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "358ae13e-db05-4b94-a07d-4f867df8cac4",
+                            ConcurrencyStamp = "9a5806c7-e930-4155-9064-b6f34c063336",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
@@ -298,7 +300,7 @@ namespace RS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user@gmail.com",
                             NormalizedUserName = "user",
-                            PasswordHash = "AQAAAAEAACcQAAAAEINub359dRcFAHcNOnuYGgfGg4DhsQKku9g0fZMsG1N8Mn7Dc1iIedt1wx38c+h6sg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM9p7Ef37MLWZNgRBWxUlSbM4YdYYlql/MR2OpARRm44GOf78/bqrWfJH3Pi4SGveg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -430,16 +432,16 @@ namespace RS.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool?>("IsShowOnHome")
+                    b.Property<bool>("IsShowOnHome")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SortOrder")
+                    b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Status")
+                    b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
@@ -478,15 +480,18 @@ namespace RS.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LanguageId")
+                        .IsRequired()
                         .HasMaxLength(5)
                         .IsUnicode(false)
                         .HasColumnType("varchar(5)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("SeoAlias")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
@@ -725,7 +730,7 @@ namespace RS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 11, 5, 10, 44, 29, 20, DateTimeKind.Local).AddTicks(1539),
+                            DateCreated = new DateTime(2021, 11, 4, 7, 42, 3, 28, DateTimeKind.Local).AddTicks(9971),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -1116,7 +1121,9 @@ namespace RS.Data.Migrations
 
                     b.HasOne("RS.Data.Entities.Language", "Language")
                         .WithMany("CategoryTranslations")
-                        .HasForeignKey("LanguageId");
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 

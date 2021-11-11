@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RS.Data.Migrations
 {
-    public partial class init : Migration
+    public partial class AddData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -133,32 +133,15 @@ namespace RS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Brands",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Brands", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SortOrder = table.Column<int>(type: "int", nullable: true),
-                    IsShowOnHome = table.Column<bool>(type: "bit", nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    IsShowOnHome = table.Column<bool>(type: "bit", nullable: false),
                     ParentId = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: true, defaultValue: 1)
+                    Status = table.Column<int>(type: "int", nullable: false, defaultValue: 1)
                 },
                 constraints: table =>
                 {
@@ -311,11 +294,11 @@ namespace RS.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     SeoDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     SeoTitle = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    LanguageId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: true),
-                    SeoAlias = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
+                    LanguageId = table.Column<string>(type: "varchar(5)", unicode: false, maxLength: 5, nullable: false),
+                    SeoAlias = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -331,7 +314,7 @@ namespace RS.Data.Migrations
                         column: x => x.LanguageId,
                         principalTable: "Languages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -507,8 +490,8 @@ namespace RS.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "ec6a4041-2d84-45bd-ae85-5c3e0e13ea19", "Administrator role", "admin", "admin" },
-                    { new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"), "eef4d833-2fda-4bd2-b5ff-d30fa74ab507", "User role", "user", "user" }
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "98cf7da6-9176-490e-8821-d2b302b98bc6", "Administrator role", "admin", "admin" },
+                    { new Guid("35c242f0-1238-4fd0-9450-00a6d3cf9573"), "98eefb2a-fade-4ed8-86f7-633571640a8e", "User role", "user", "user" }
                 });
 
             migrationBuilder.InsertData(
@@ -525,21 +508,8 @@ namespace RS.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, "be728df4-491a-45b0-96e8-bbaef0a765c3", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "Admin", "Ad", false, null, "admin@gmail.com", "admin", "AQAAAAEAACcQAAAAELMixqqFmrtPDoKpxSleGCmFgfYy43hg3FebT86NRfbmN7UgrkdwMDpQp8NTJlS4+A==", null, false, "", false, "admin" },
-                    { new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"), 0, "8ffdc7ba-e84f-44dc-ba10-ec9e2fa17933", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user@gmail.com", true, "User", "Us", false, null, "user@gmail.com", "user", "AQAAAAEAACcQAAAAECtSsnT4JzpRXq4ElC/0IF2ku+fNs3PrghZII1zas6bKBHqMEUp5uWovcAxw2U3Fzw==", null, false, "", false, "user" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Brands",
-                columns: new[] { "Id", "Description", "ImageName", "IsDeleted", "Name", "Type" },
-                values: new object[,]
-                {
-                    { 6, "Description", null, false, "Test Brand 6", 2 },
-                    { 5, "Description", null, false, "Test Brand 5", 2 },
-                    { 4, "Description", null, false, "Test Brand 4", 2 },
-                    { 2, "Description", null, false, "Test Brand 2", 1 },
-                    { 1, "Description", null, false, "Test Brand 1", 1 },
-                    { 3, "Description", null, false, "Test Brand 3", 1 }
+                    { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, "e4791daa-e68c-49f1-8c25-f561d23e2407", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@gmail.com", true, "Admin", "Ad", false, null, "admin@gmail.com", "admin", "AQAAAAEAACcQAAAAENIwlbwOyzsOzE+hijxx2IflQKoqOsVql4POcDhlU19OtSgVeWuZmien0xYqUO0mJg==", null, false, "", false, "admin" },
+                    { new Guid("d1e5705a-03e0-4d86-8396-b639cedef1b7"), 0, "0b8f9d67-dc61-4a86-bc99-698edb990a03", new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "user@gmail.com", true, "User", "Us", false, null, "user@gmail.com", "user", "AQAAAAEAACcQAAAAEOnogdQ0SpPR/UNWun8Ih6CwLTOS00HoS22kL3K6uesrayMIX4dnOgEH5if6XlveuQ==", null, false, "", false, "user" }
                 });
 
             migrationBuilder.InsertData(
@@ -547,8 +517,8 @@ namespace RS.Data.Migrations
                 columns: new[] { "Id", "IsShowOnHome", "ParentId", "SortOrder", "Status" },
                 values: new object[,]
                 {
-                    { 1, true, null, 1, 1 },
-                    { 2, true, null, 2, 1 }
+                    { 2, true, null, 2, 1 },
+                    { 1, true, null, 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -563,18 +533,18 @@ namespace RS.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "DateCreated", "IsFeatured", "OriginalPrice", "Price" },
-                values: new object[] { 1, new DateTime(2021, 11, 11, 9, 35, 41, 832, DateTimeKind.Local).AddTicks(397), null, 100000m, 200000m });
+                values: new object[] { 1, new DateTime(2021, 7, 17, 17, 50, 59, 945, DateTimeKind.Local).AddTicks(1307), null, 100000m, 200000m });
 
             migrationBuilder.InsertData(
                 table: "Slides",
                 columns: new[] { "Id", "Description", "Image", "Name", "SortOrder", "Status", "Url" },
                 values: new object[,]
                 {
-                    { 5, "Cras justo odio", "/slides/slide-05.jpg", "Second Thumbnail label", 5, 1, "#" },
                     { 1, "Cras justo odio", "/slides/slide-01.jpg", "Second Thumbnail label", 1, 1, "#" },
                     { 2, "Cras justo odio", "/slides/slide-02.jpg", "Second Thumbnail label", 2, 1, "#" },
                     { 3, "Cras justo odio", "/slides/slide-03.jpg", "Second Thumbnail label", 3, 1, "#" },
                     { 4, "Cras justo odio", "/slides/slide-04.jpg", "Second Thumbnail label", 4, 1, "#" },
+                    { 5, "Cras justo odio", "/slides/slide-05.jpg", "Second Thumbnail label", 5, 1, "#" },
                     { 6, "Cras justo odio", "/slides/slide-06.jpg", "Second Thumbnail label", 6, 1, "#" }
                 });
 
@@ -686,9 +656,6 @@ namespace RS.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "Carts");
