@@ -16,7 +16,7 @@ namespace RS.Data.Configurations
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Comment).HasMaxLength(500);
             builder.Property(x => x.PublishedDate);
-            builder.HasOne(x => x.Products).WithMany(x => x.ProductReviews).HasForeignKey(x => x.ProductId);
+            //builder.HasOne(x => x.Products).WithMany(x => x.ProductReviews).HasForeignKey(x => x.ProductId);
         }
     }
 }

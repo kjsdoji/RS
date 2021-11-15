@@ -22,13 +22,15 @@ namespace RS.WebApp.Controllers
         {
             return View();
         }
+
+        // , ProductReviewCreateRequest createReviewRequest
         [HttpPost]
         public async Task<IActionResult> Add(int productId, ProductReviewCreateRequest createReviewRequest)
         {
             string host = _httpContextAccessor.HttpContext.Request.Host.Value;
             Console.WriteLine(host);
             await _productApiClient.AddReview(productId, createReviewRequest);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Detail", "Product");
         }
     }
 }

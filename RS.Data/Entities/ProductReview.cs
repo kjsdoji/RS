@@ -10,7 +10,7 @@ namespace RS.Data.Entities
         public string Comment { get; set; }
         public DateTime PublishedDate { get; set; }
         public int ProductId { get; set; }
-        public Product Products { get; set; }
+        //public Product Products { get; set; }
         public int Rating { get; set; }
 
     }

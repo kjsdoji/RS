@@ -18,6 +18,7 @@
 <ul class="breadcrumb">
     <li><a href="/"><localize>Home</localize></a> <span class="divider">/</span></li>
     <li class="active">@Model.Product.Name</li>
+    <li class="active">@Model.Product.Id</li>
 </ul>
 
 <div class="row">
@@ -102,9 +103,9 @@
             <span class="starFadeN" id="sRate4"></span>
             <span class="starFadeN" id="sRate5"></span>
         </div>
-        @if (Model.ProductReviews != null)
+        @if (Model.Product.ProductReviews != null)
         {
-            @foreach (var item in Model.ProductReviews)
+            @foreach (var item in Model.Product.ProductReviews)
             {
                 <hr />
                 <div class="row">
@@ -126,7 +127,7 @@
                 </div>
             }
         }
-        @await Html.PartialAsync("_CommentBox")
+        @await Html.PartialAsync("_CommentBox", Model.Product)
     </div>
     <!-- Review End ===================================================================== -->
     <div class="span9">

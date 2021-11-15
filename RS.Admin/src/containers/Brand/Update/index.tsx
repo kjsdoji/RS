@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Redirect, useParams } from 'react-router';
+import { Redirect, useParams } from 'react-router-dom';
 
 import { NOTFOUND } from 'src/constants/pages';
 import { useAppSelector } from 'src/hooks/redux';
@@ -16,8 +16,8 @@ const UpdateBrandContainer = () => {
   const existBrand = brands?.items.find(item => item.id === Number(id));
 
   useEffect(() => {
-
     if (existBrand) {
+      console.log("existBrand aaaaaaa", existBrand)
       setBrand({
         id: existBrand.id,
         name: existBrand.name,

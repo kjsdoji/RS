@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PencilFill, XCircle } from "react-bootstrap-icons";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 import ButtonIcon from "src/components/ButtonIcon";
 import { NotificationManager } from 'react-notifications';
@@ -11,7 +11,7 @@ import IPagedModel from "src/interfaces/IPagedModel";
 import IBrand from "src/interfaces/Brand/IBrand";
 import formatDateTime from "src/utils/formatDateTime";
 import Info from "../Info";
-import { EDIT_BRAND_ID } from "src/constants/pages";
+// import { EDIT_BRAND_ID } from "src/constants/pages";
 import ConfirmModal from "src/components/ConfirmModal";
 import { useAppDispatch } from "src/hooks/redux";
 import {
@@ -128,12 +128,13 @@ const BrandTable: React.FC<Props> = ({
 
   const history = useHistory();
   const handleEdit = (id: number) => {
-    console.log('aaaaaaaaaaa  ', history);
-    history.push(EDIT_BRAND_ID(id));
+    console.log('history aaaaaaaaaaa  ', history);
+    // history.push(EDIT_BRAND_ID(id));
+    history.push(`/brand/edit/${id}`);
   };
 
   return (
-    <Router>
+    <>
       <Table
         columns={columns}
         handleSort={handleSort}
@@ -197,7 +198,7 @@ const BrandTable: React.FC<Props> = ({
           }
         </div>
       </ConfirmModal>
-    </Router>
+    </>
   );
 };
 

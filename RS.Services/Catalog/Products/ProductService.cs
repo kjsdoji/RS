@@ -225,7 +225,7 @@ namespace RS.Services.Catalog.Products
                                     where pic.ProductId == productId && ct.LanguageId == languageId
                                     select ct.Name).ToListAsync();
             var image = await _context.ProductImages.Where(x => x.ProductId == productId && x.IsDefault == true).FirstOrDefaultAsync();
-            //var reviews = await _context.ProductReviews.Where(x => x.ProductId == productId).ToListAsync();
+            var reviews = await _context.ProductReviews.Where(x => x.ProductId == productId).ToListAsync();
             var productViewModel = new ProductVm()
             {
                 Id = product.Id,
@@ -243,7 +243,7 @@ namespace RS.Services.Catalog.Products
                 ViewCount = product.ViewCount,
                 Categories = categories,
                 ThumbnailImage = image != null ? image.ImagePath : "no-image.jpg",
-                //ProductReviews = reviews
+                ProductReviews = reviews
             };
             return productViewModel;
         }

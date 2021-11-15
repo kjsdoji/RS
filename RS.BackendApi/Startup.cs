@@ -40,12 +40,12 @@ namespace RS.BackendApi
         {
             services.AddDbContext<RSDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
-            
+
             services.AddTransient<IProductService, ProductService>();
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<RSDbContext>()
                 .AddDefaultTokenProviders();
-            
+
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IFileStorageService, FileStorageService1>();
             services.AddTransient<IProductService, ProductService>();
@@ -62,6 +62,8 @@ namespace RS.BackendApi
 
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Rookie Shop", Version = "v1" });
@@ -93,11 +95,11 @@ namespace RS.BackendApi
                       }
                     });
             });
-            
+
             string issuer = Configuration.GetValue<string>("Tokens:Issuer");
             string signingKey = Configuration.GetValue<string>("Tokens:Key");
             byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
-            
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
