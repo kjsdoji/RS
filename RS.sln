@@ -30,9 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RS.Utilities", "RS.Utilitie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RS.ViewModels", "RS.ViewModels\RS.ViewModels.csproj", "{94EE9D2F-77BF-4E32-B44F-C1610733ED11}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{706D8A88-3E24-46FF-9C0F-6C1305819E6E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4UnitTest", "4UnitTest", "{706D8A88-3E24-46FF-9C0F-6C1305819E6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RS.XUnitTest", "RS.XUnitTest\RS.XUnitTest.csproj", "{4FC1B78A-93BD-49CC-83EC-FAB56BBD1BA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RS.XUnitTest", "RS.XUnitTest\RS.XUnitTest.csproj", "{4FC1B78A-93BD-49CC-83EC-FAB56BBD1BA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
